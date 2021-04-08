@@ -19,6 +19,8 @@ pipeline {
         stage('Swarm Config') { 
             steps{
                 sh 'cd ansible'
+                sh 'ls'
+                sh 'ls -a'
                 sh 'ansible-galaxy collection install community.docker'
                 sh 'ansible-playbook -i inventory.yaml playbook.yaml'
             }
