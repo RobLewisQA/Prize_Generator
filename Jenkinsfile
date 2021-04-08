@@ -1,8 +1,8 @@
 pipeline {
     agent any
-    environment{
-        DATABASE_URI
-    }
+    //environment{
+    //    DATABASE_URI
+    //}
     stages {
         //stage('Test') {
         //}
