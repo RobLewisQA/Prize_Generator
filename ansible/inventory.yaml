@@ -1,9 +1,12 @@
 all:
-  hosts:
-    manager:
-      users:
-        10.128.0.16:
-      vars:
-        ansible_user: Rob
-        ansible_ssh_private_key_file: '~/.ssh/ansible_id_rsa'
-        ansible_ssh_common_args: 'o StrictHostKeyChecking=no'
+  children:
+    managers:
+      hosts:
+        manager-main:
+    workers:
+      hosts:
+        worker-one:
+  vars:
+    ansible_user: Rob
+    ansible_ssh_private_key_file: '/home/Rob/.ssh/ansible_id_rsa'
+    ansible_ssh_common_args: '-o StrictHostKeyChecking=no'

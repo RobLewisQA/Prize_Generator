@@ -5,9 +5,7 @@ from flask_sqlalchemy import SQLAlchemy
 import requests
 import pandas as pd
 
-@app.route('/user/add', methods=['GET','POST'])
-def add_users():
-    return render_template('add_user.html')
+
 
 @app.route('/')
 def frontend():
@@ -19,7 +17,10 @@ def frontend():
 #     df = pd.read_html(requests.get('http://back-end:5000').text)
 #     df1 = df.sort_values(by='id', ascending=False).head(1)
 #     return pd.to_html(df1)
-
+@app.route('/user/add', methods=['GET','POST'])
+def add_users():
+    return render_template('add_user.html')
+    
 @app.route('/adding', methods=['GET','POST'])
 def add_user():
     if request.method=='POST':

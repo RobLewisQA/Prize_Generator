@@ -2,7 +2,7 @@ version: "3.8"
 services:
   back-end:
     container_name: back-end
-    image: back-end:latest
+    image: roblewisqa/back-end:latest
     build: ./back-end
     ports:
     - target: 5000
@@ -31,7 +31,7 @@ services:
   
   random_numbers:
     container_name: random_numbers
-    image: random_numbers:latest
+    image: roblewisqa/random_numbers:latest
     build: ./random_numbers
     ports:
     - target: 5001
@@ -39,7 +39,7 @@ services:
 
   random_letters:
     container_name: random_letters
-    image: random_letters:latest
+    image: roblewisqa/random_letters:latest
     build: ./random_letters
     ports:
     - target: 5002
@@ -47,7 +47,7 @@ services:
 
   frontend:
     container_name: frontend
-    image: frontend:latest
+    image: roblewisqa/frontend:latest
     build: ./frontend
     ports:
     - target: 5003
