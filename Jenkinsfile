@@ -1,10 +1,10 @@
 pipeline {
     agent any
-    //environment{
+    environment{
     //    DATABASE_URI = credentials('DATABASE_URI')
-    //      registry = "roblewisqa"
-    //      registryCredential = 'dockerhub_id'
-    //}
+          registry = "roblewisqa"
+          registryCredential = 'dockerhub_id'
+    }
     stages {
         //stage('Test') {
         //}
@@ -13,11 +13,11 @@ pipeline {
                 sh 'docker-compose build'
             }
         }
-        //stage('Push') { 
-        //    steps{
-        //        sh 'docker-compose push' 
-        //    }
-        //}
+        stage('Push') { 
+            steps{
+                sh 'docker-compose push' 
+            }
+        }
         stage('Swarm Config') { 
             steps{
                 sh 'ansible-galaxy collection install community.docker'
