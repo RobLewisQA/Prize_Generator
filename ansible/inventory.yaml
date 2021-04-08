@@ -2,7 +2,7 @@ all:
   children:
     managers:
       hosts:
-        manager:
+        manager-main:
     workers:
       hosts:
         worker-one:
