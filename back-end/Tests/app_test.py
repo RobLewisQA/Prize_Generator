@@ -8,10 +8,14 @@ class TestBase(TestCase):
     def create_app(self):
         return app
 
-class TestResponse(TestBase):
 
-    def test_rand_numbers(self):
-        with patch('requests.get') as g:
-            g.return_value.text = "jim"
-            response = self.client.get('http://frontend:5003')
-            self.assertIn(b'jim', response.data)
+# frontend
+# class TestResponse(TestBase):
+#     def test_backend_logic(self):
+#         with patch('requests.post') as p:
+#             p.return_value.text = 'test'
+
+#             data = {"new_first_name":"jack", "new_last_name":"jackson", "new_email":"jj@test.com"}
+#             response = self.client.post(url_for('add_user'), data = data)
+            
+#             self.assertEqual(200, response.status_code)

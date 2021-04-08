@@ -37,10 +37,18 @@ def add_users():
         new_user = Users(first_name=new_f_name,last_name=new_l_name,email=new_eml,rand_number=new_number,win_lose='winner')
         db.session.add(new_user)
         db.session.commit()
+        outcome = 'win'
+      
       else:
         new_user = Users(first_name=new_f_name,last_name=new_l_name,email=new_eml,rand_number=new_number,win_lose='loser')
         db.session.add(new_user)
         db.session.commit()
+        outcome='lose'
         #data = Users.query.
-      return redirect('http://frontend:5003/home')
+      #return redirect('http://frontend:5003/home')
+      return jsonify({
+        "rand_number": new_number,
+        "rand_letter":new_let,
+        "win_lose": outcome
+      })
 
