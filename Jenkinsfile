@@ -17,6 +17,6 @@ pipeline {
         }
         //stage('Deploy') {
         //    sh 'docker stack deploy'  
-        }
+        //}
     }
 }

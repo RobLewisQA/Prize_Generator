@@ -1,6 +1,6 @@
 ---
 # tasks file for worker
-- names: add nodes
+- name: add nodes
   community.docker.docker_swarm:
     state: join
     advertise_addr: "{{ inventory_hostname }}"
