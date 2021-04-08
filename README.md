@@ -47,4 +47,4 @@ The port that the application runs on changes | The app stops working | Low | Hi
 
 ## References:
 ##### r1 - https://appfleet.com/blog/building-docker-images-to-docker-hub-using-jenkins-pipelines/ - using jenkins with dockerhub
-##### r2
+##### r2 - https://www.blazemeter.com/blog/how-to-integrate-your-github-repository-to-your-jenkins-project
