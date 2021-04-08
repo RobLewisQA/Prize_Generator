@@ -46,5 +46,5 @@ The port that the application runs on changes | The app stops working | Low | Hi
 >To see a kanban Trello board of the development process workflow, click [here](https://trello.com/b/h1v0LX39/lottery)
 
 ## References:
-##### r1
+##### r1 - https://appfleet.com/blog/building-docker-images-to-docker-hub-using-jenkins-pipelines/ - using jenkins with dockerhub
 ##### r2
