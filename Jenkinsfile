@@ -21,7 +21,7 @@ pipeline {
         stage('Swarm Config') { 
             steps{
                 sh 'ansible-galaxy collection install community.docker'
-                sh 'cd ansible && ansible-playbook -i inventory.yaml playbook.yaml'
+                sh 'cd ansible && ansible-playbook -i inventory.yaml playbook.yaml Prize_Project' 
             }
         }
         stage('Deploy') {
