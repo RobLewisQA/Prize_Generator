@@ -22,7 +22,7 @@ pipeline {
                 sh 'ls'
                 sh 'ls -a'
                 sh 'ansible-galaxy collection install community.docker'
-                sh 'ansible-playbook -i inventory.yaml playbook.yaml'
+                sh 'ansible-playbook -i ansible/inventory.yaml ansible/playbook.yaml'
             }
         }
         stage('Deploy') {
