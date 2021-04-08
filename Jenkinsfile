@@ -7,16 +7,24 @@ pipeline {
         //stage('Test') {
         //}
         stage('Build') {
-            sh 'docker-compose build'  
+            steps{
+                sh 'docker-compose build'
+            }
         }
         stage('Push') { 
-            sh 'docker-compose push' 
+            steps{
+                sh 'docker-compose push' 
+            }
         }
         stage('Swarm Config') { 
-             sh 'ansible-playbook -i inventory.yaml playbook.yaml'
+            steps{
+                sh sh 'ansible-playbook -i inventory.yaml playbook.yaml'
+            }
         }
-        //stage('Deploy') {
-        //    sh 'docker stack deploy'  
-        //}
+        stage('Deploy') {
+            steps{
+                 sh 'docker-compose up'
+            }   
+        }
     }
 }
