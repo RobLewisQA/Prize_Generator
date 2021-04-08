@@ -26,8 +26,7 @@ pipeline {
         }
         stage('Deploy') {
             steps{
-                sh 'cd Prize_Project'
-                sh 'docker-compose up'
+                sh 'cd Prize_Generator && docker-compose up'
             }   
         }
     }
