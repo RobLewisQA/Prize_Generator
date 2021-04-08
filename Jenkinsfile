@@ -25,7 +25,6 @@ pipeline {
                 }
             }
         }
-    
         stage('Swarm Config') { 
             steps{
                 sh 'ansible-galaxy collection install community.docker'
