@@ -26,7 +26,7 @@ pipeline {
         }
         stage('Deploy') {
             steps{
-                sh 'docker stack deploy --compose-file docker-compose.yaml prize_generator'
+                sh 'docker swarm init && docker stack deploy --compose-file docker-compose.yaml prize_generator'
             }   
         }
     }
