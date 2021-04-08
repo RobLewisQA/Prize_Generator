@@ -18,12 +18,14 @@ pipeline {
         }
         stage('Swarm Config') { 
             steps{
+                sh 'cd ansible'
                 sh 'ansible-playbook -i inventory.yaml playbook.yaml'
             }
         }
         stage('Deploy') {
             steps{
-                 sh 'docker-compose up'
+                sh 'cd Prize_Project'
+                sh 'docker-compose up'
             }   
         }
     }
