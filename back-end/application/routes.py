@@ -46,7 +46,7 @@ def add_users():
         outcome='lose'
         #data = Users.query.
       #return redirect('http://frontend:5003/home')
-      return jsonify({
+    return jsonify({
         "rand_number": new_number,
         "rand_letter":new_let,
         "win_lose": outcome
