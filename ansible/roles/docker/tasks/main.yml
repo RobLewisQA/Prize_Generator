@@ -45,6 +45,7 @@
   with_items: "{{ docker_users }}"
 
 - name: install docker SDK
+  become: true
   pip:
     name: docker-py
 
