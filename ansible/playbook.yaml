@@ -1,9 +1,9 @@
 - hosts: managers
   roles:
-  - docker
+  - docker-install
   - manager
 
 - hosts: workers
   roles:
-  - docker
+  - docker-install
   - worker
