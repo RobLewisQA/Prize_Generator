@@ -12,8 +12,8 @@ services:
     container_name: mysql
     build: ./db
     environment:
-      MYSQL_DATABASE: $(DATABASE_URI)
-      MYSQL_ROOT_PASSWORD: $(SECRET_KEY)
+      MYSQL_DATABASE: flask-db #$(DATABASE_URI)
+      MYSQL_ROOT_PASSWORD: password #$(SECRET_KEY)
 
     ports:
     - target: 3306
