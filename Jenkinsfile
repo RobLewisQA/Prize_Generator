@@ -16,15 +16,12 @@ pipeline {
                 sh 'docker-compose build'
             }
         }
-        stage('Push') { 
-            steps{
-                script {
-                    docker.withRegistry( 'registry', registryCredential ) {
-                        dockerImage.push()
-                    }
-                }
-            }
-        }
+        //stage('Push') { 
+        //    steps{
+
+        //        }
+        //    }
+        //}
         stage('Swarm Config') { 
             steps{
                 sh 'ansible-galaxy collection install community.docker'
