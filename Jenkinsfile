@@ -15,10 +15,11 @@ pipeline {
         //    steps{
         //        sh 'docker-compose push' 
         //    }
-        }
+        //}
         stage('Swarm Config') { 
             steps{
                 sh 'cd ansible'
+                sh 'ansible-galaxy collection install community.docker'
                 sh 'ansible-playbook -i inventory.yaml playbook.yaml'
             }
         }
