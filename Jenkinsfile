@@ -18,7 +18,11 @@ pipeline {
         }
         stage('Push') { 
             steps{
-                sh 'docker-compose push' 
+                script {
+                    docker.withRegistry( '', registryCredential ) {
+                        dockerImage.push()
+        }
+                //sh 'docker-compose push' 
             }
         }
         stage('Swarm Config') { 
