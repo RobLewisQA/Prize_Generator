@@ -7,6 +7,7 @@ pipeline {
           dockerImage = ''
     }
     stages {
+        // add multi-step testing stage here
         //stage('Test') {
         //}
         
