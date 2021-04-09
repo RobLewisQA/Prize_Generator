@@ -23,7 +23,7 @@ pipeline {
                 //script{
                 //    docker.withRegistry('https://registry.hub.docker.com','dockerhub_id'){
                 //    image.push("${env.app_version}")}
-                    }
+                ///    }
                 }
             }
 
