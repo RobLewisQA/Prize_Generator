@@ -16,11 +16,11 @@ pipeline {
             }
         }
         
-        //stage('Push') { 
-        //    steps{
-        //        sh 'docker-compose push'
-        //        }
-        //    }
+        stage('Push') { 
+            steps{
+                sh 'docker-compose push'
+                }
+            }
 
         stage('Swarm Config') { 
             steps{
