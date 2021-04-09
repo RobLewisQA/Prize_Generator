@@ -15,12 +15,13 @@ pipeline {
                 sh 'docker-compose build'
             }
         }
-        stage('Push') { 
-            steps{
-                sh 'docker-compose push'
-                }
-            }
-                    
+        
+        //stage('Push') { 
+        //    steps{
+        //        sh 'docker-compose push'
+        //        }
+        //    }
+
         stage('Swarm Config') { 
             steps{
                 sh 'ansible-galaxy collection install community.docker'
