@@ -81,7 +81,7 @@ def lottery_engine():
             "prize_won" : prize
             }
         data1 = {"new_first_name":first_name_n, "new_last_name":last_name_n, "win_lose":outcome, "prize_won": prize, "new_number":number}
-        requests.post('http://back-end:5000/submit', json = data2)
+        requests.post(url_for('databse_sub'), json = data2)
         
         
         
