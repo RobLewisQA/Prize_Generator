@@ -19,9 +19,10 @@ pipeline {
         
         stage('Push') { 
             steps{
-                script{
-                    docker.withRegistry('https://registry.hub.docker.com','dockerhub_id'){
-                    image.push("${env.app_version}")}
+                    sh 'docker-compose push'
+                //script{
+                //    docker.withRegistry('https://registry.hub.docker.com','dockerhub_id'){
+                //    image.push("${env.app_version}")}
                     }
                 }
             }
