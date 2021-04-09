@@ -23,21 +23,45 @@ def add_users():
       new_let = requests.get('http://random_letters:5002/rletters').text
       new_number = str(new_num)+new_let
       
-      if int(new_num) < 300:
-        new_user = Users(first_name=new_f_name,last_name=new_l_name,rand_number=new_eml,win_lose=new_number,prize='winner')
+      if int(new_num) < 300 & new_let == 'a':
+        new_user = Users(first_name=new_f_name,last_name=new_l_name,rand_number=new_number,win_lose='winner',prize='Gold')
         db.session.add(new_user)
         db.session.commit()
-        outcome = 'win'
+      elif int(new_num) < 300 & new_let == 'b':
+        new_user = Users(first_name=new_f_name,last_name=new_l_name,rand_number=new_number,win_lose='winner',prize='Silver')
+        db.session.add(new_user)
+        db.session.commit()
+      elif int(new_num) < 300 & new_let == 'c':
+        new_user = Users(first_name=new_f_name,last_name=new_l_name,rand_number=new_number,win_lose='winner',prize='Bronze')
+        db.session.add(new_user)
+        db.session.commit()
       else:
-        new_user = Users(first_name=new_f_name,last_name=new_l_name,rand_number=new_eml,win_lose=new_number,prize='loser')
+        new_user = Users(first_name=new_f_name,last_name=new_l_name,rand_number=new_number,win_lose='loser',prize='nothing')
         db.session.add(new_user)
         db.session.commit()
-        outcome='lose'
       
       data = {"rand_number":new_number,"rand_letter":new_let,"win_lose":outcome}
       requests.post('http://frontend:5003/results', json = data)
       
       return redirect('http://frontend:5003/')
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     #else:
     #  return jsonify({
     #      "rand_number": new_number,
@@ -46,16 +70,17 @@ def add_users():
      ##   })
 
 
+
 @app.route('/submit',methods=['GET','POST'])
 def database_sub():
   if request.method=='POST':
-    content = request.data
+    content = request.json
     new_f_name = content["new_first_name"]
     new_l_name = content['new_last_name']
     outcome = content['win_lose']
     prize = content['prize_won']
     new_number = content['new_number']
-    new_user = Users(first_name=new_f_name,last_name=new_l_name,random_number=outcome,win_lose=new_number,prize=prize)
+    new_user = Users(first_name=new_f_name,last_name=new_l_name,rand_number=outcome,win_lose=new_number,prize=prize)
     db.session.add(new_user)
     db.session.commit()
 

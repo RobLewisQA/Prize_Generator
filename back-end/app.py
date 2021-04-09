@@ -1,9 +1,9 @@
 from flask import Flask, render_template
 from flask_sqlalchemy import SQLAlchemy
-from application import app,db
-from application import db
+from application import app, db
+#from application import db
 
-db.drop_all()
+#db.drop_all()
 db.create_all()
 
 if __name__=='__main__':
