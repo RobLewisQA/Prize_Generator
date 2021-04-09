@@ -8,8 +8,9 @@ pipeline {
     stages {
         
         // add multi-step testing stage here
-        //stage('Test') {
-        //}
+        stage('Test') {
+            sh 'bash test_script.sh'
+        }
         
         stage('Build') {
             steps{
