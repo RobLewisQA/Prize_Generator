@@ -4,6 +4,8 @@ from flask_testing import TestCase
 
 from application import app
 
+#app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///data.db"
+
 class TestBase(TestCase):
     def create_app(self):
         return app

@@ -7,17 +7,8 @@ services:
     ports:
     - target: 5000
       protocol: tcp
-
-  db: 
-    container_name: mysql
-    build: ./db
-    environment:
-      MYSQL_DATABASE: flask-db #$(DATABASE_URI)
-      MYSQL_ROOT_PASSWORD: password #$(SECRET_KEY)
-
-    ports:
-    - target: 3306
-      protocol: tcp
+    environment: 
+      DATABASE_URI: ${DATABASE_URI}
 
   nginx:
     image: nginx:latest

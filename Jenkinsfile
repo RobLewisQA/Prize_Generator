@@ -1,10 +1,8 @@
 pipeline {
     agent any
     environment{
-    //    DATABASE_URI = credentials('DATABASE_URI')
-          registry = "roblewisqa/prize_project"
-          registryCredential = 'dockerhub_id'
-          dockerImage = ''
+        DATABASE_URI = credentials('DATABASE_URI')
+
     }
     stages {
         // add multi-step testing stage here
@@ -30,7 +28,8 @@ pipeline {
         }
         stage('Deploy') {
             steps{
-                sh 'docker swarm init && docker stack deploy --compose-file docker-compose.yaml prize_project'
+                //sh 'docker swarm init && docker stack deploy --compose-file docker-compose.yaml prize_project'
+                sh 'docker-compose build'
             }   
         }
     }
