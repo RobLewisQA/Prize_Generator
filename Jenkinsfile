@@ -36,7 +36,8 @@ pipeline {
 
         stage('Deploy') {
             steps{
-                sh 'docker stack deploy --compose-file docker-compose.yaml prize_project'
+                sh 'bash deploy-script.sh'
+                //sh 'docker stack deploy --compose-file docker-compose.yaml prize_project'
                 //sh 'docker-compose up'
             }   
         }
