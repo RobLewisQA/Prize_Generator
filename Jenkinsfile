@@ -7,7 +7,7 @@ pipeline {
     }
     stages {
         
-        // add multi-step testing stage here
+        // add multi-step testing stage here #
         stage('Test') {
             steps{
                 sh 'bash test_script.sh'
