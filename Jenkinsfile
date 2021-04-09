@@ -5,6 +5,7 @@ pipeline {
 
     }
     stages {
+        
         // add multi-step testing stage here
         //stage('Test') {
         //}
@@ -31,7 +32,7 @@ pipeline {
         stage('Deploy') {
             steps{
                 //sh 'docker swarm init && docker stack deploy --compose-file docker-compose.yaml prize_project'
-                sh 'docker-compose up -d'
+                sh 'docker-compose up'
             }   
         }
     }
