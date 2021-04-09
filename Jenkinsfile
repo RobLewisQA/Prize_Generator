@@ -20,7 +20,7 @@ pipeline {
         stage('Push') { 
             steps{
                 docker.withRegistry('https://registry.hub.docker.com','dockerhub_id'){
-                        image.push("${env.app_version}")
+                    image.push("${env.app_version}")
                     }
                 }
             }
