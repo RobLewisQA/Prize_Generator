@@ -9,9 +9,10 @@ pipeline {
         
         // add multi-step testing stage here
         stage('Test') {
-            sh 'bash test_script.sh'
+            steps{
+                sh 'bash test_script.sh'
+            }
         }
-        
         stage('Build') {
             steps{
                 sh 'docker-compose build'
