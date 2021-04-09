@@ -22,7 +22,7 @@ class TestResponse(TestBase):
         output = response.data 
         assert int(output) > 99 & int(output)<1001
 
-    def test_rand_numbers(self):
+    # def test_rand_numbers(self):
         # with patch('requests.get') as g:
         #     g.return_value.text = "700"
         
