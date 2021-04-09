@@ -43,12 +43,18 @@ class TestResponse(TestBase):
         data = {"new_first_name":"jack", "new_last_name":"jackson", "new_email":"jj@test.com"}
         response = self.client.post(url_for('add_users'), json = data)
         
+        
         with requests_mock.mock() as g:
-            g.get('http://random_numbers:5001/rnum', text = '666')
+            g.get('http://random_numbers:5001/rnum', text = '500')
             g.get('http://random_letters:5002/rletters', text = 'b')
-            data = {"new_first_name":"jack", "new_last_name":"jackson", "new_email":"jj@test.com"}
-            response = self.client.post(url_for('add_users'), json = data)
-            
+            #data = {"new_first_name":"jack", "new_last_name":"jackson", "new_email":"jj@test.com"}
+            #response = self.client.post(url_for('add_users'), json = data)
             self.assertEqual(200, response.status_code)
+        
+        #data = {"new_first_name":"jack", "new_last_name":"jackson", "new_email":"jj@test.com"}
+        #response = self.client.post(url_for('add_users'), json = data)
+        self.assertEqual(200, response.status_code)
 
 
+#new_num = requests.get('http://random_numbers:5001/rnum').text
+#new_let = requests.get('http://random_letters:5002/rletters').text
