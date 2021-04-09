@@ -2,6 +2,7 @@ pipeline {
     agent any
     environment{
         DATABASE_URI = credentials('DATABASE_URI')
+        app_version = "version1"
 
     }
     stages {
@@ -18,7 +19,9 @@ pipeline {
         
         stage('Push') { 
             steps{
-                sh 'docker-compose push'
+                docker.withRegistry('https://registry.hub.docker.com','dockerhub_id'){
+                        image.push("${env.app_version}")
+                    }
                 }
             }
 
