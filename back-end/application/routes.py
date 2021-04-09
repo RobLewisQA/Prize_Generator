@@ -78,9 +78,9 @@ def database_sub():
     new_f_name = content["new_first_name"]
     new_l_name = content['new_last_name']
     outcome = content['win_lose']
-    prize = content['prize_won']
+    prize_taken = content['prize_won']
     new_number = content['new_number']
-    new_user = Users(first_name=new_f_name,last_name=new_l_name,rand_number=outcome,win_lose=new_number,prize=prize)
+    new_user = Users(first_name=new_f_name,last_name=new_l_name,rand_number=new_number,win_lose=outcome,prize=prize_taken)
     db.session.add(new_user)
     db.session.commit()
 

@@ -73,8 +73,17 @@ def lottery_engine():
             outcome = 'lose'
             prize = 'no prize'
         
+        data2={
+            "new_first_name": new_num,
+            "new_last_name":new_let,
+            "new_number" : number,
+            "win_lose": outcome,
+            "prize_won" : prize
+            }
         data1 = {"new_first_name":first_name_n, "new_last_name":last_name_n, "win_lose":outcome, "prize_won": prize, "new_number":number}
-        requests.post('http://back-end:5000/submit', json = data1)
+        requests.post('http://back-end:5000/submit', json = data2)
+        
+        
         
         return {
           "rand_number": new_num,
