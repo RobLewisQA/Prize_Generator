@@ -15,19 +15,19 @@ pipeline {
                 sh 'docker-compose build'
             }
         }
-        //stage('Push') { 
-        //    steps{
-
-        //        }
-        //    }
-        //}
+        stage('Push') { 
+            steps{
+                sh 'docker-compose push'
+                }
+            }
+        }
         
-        //stage('Swarm Config') { 
-        //    steps{
-        //        sh 'ansible-galaxy collection install community.docker'
-        //        sh 'cd ansible && ansible-playbook -i inventory.yaml playbook.yaml' 
-        //    }
-        //}
+        stage('Swarm Config') { 
+            steps{
+                sh 'ansible-galaxy collection install community.docker'
+                sh 'cd ansible && ansible-playbook -i inventory.yaml playbook.yaml' 
+            }
+        }
 
         stage('Deploy') {
             steps{
