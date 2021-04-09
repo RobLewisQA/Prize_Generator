@@ -24,12 +24,12 @@ def add_users():
       new_number = str(new_num)+new_let
       
       if int(new_num) < 300:
-        new_user = Users(first_name=new_f_name,last_name=new_l_name,email=new_eml,rand_number=new_number,win_lose='winner')
+        new_user = Users(first_name=new_f_name,last_name=new_l_name,rand_number=new_eml,win_lose=new_number,prize='winner')
         db.session.add(new_user)
         db.session.commit()
         outcome = 'win'
       else:
-        new_user = Users(first_name=new_f_name,last_name=new_l_name,email=new_eml,rand_number=new_number,win_lose='loser')
+        new_user = Users(first_name=new_f_name,last_name=new_l_name,rand_number=new_eml,win_lose=new_number,prize='loser')
         db.session.add(new_user)
         db.session.commit()
         outcome='lose'
@@ -55,7 +55,7 @@ def database_sub():
     outcome = content['win_lose']
     prize = content['prize_won']
     new_number = content['new_number']
-    new_user = Users(first_name=new_f_name,last_name=new_l_name,email=outcome,rand_number=new_number,win_lose=prize)
+    new_user = Users(first_name=new_f_name,last_name=new_l_name,random_number=outcome,win_lose=new_number,prize=prize)
     db.session.add(new_user)
     db.session.commit()
 
