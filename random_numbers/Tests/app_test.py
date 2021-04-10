@@ -1,8 +1,8 @@
 from unittest.mock import patch
 from flask import url_for
 from flask_testing import TestCase
-
 from application import app
+import requests
 
 class TestBase(TestCase):
     def create_app(self):
@@ -10,14 +10,29 @@ class TestBase(TestCase):
 
 class TestResponse(TestBase):
 
-    def test_rand_numbers(self):
-        with patch('requests.get') as g:
-            g.return_value.text = "109"
-            response = self.client.get('http://back-end:5000')
-            self.assertIn(b'109', response.data)
-
     def test_num_generator(self):
         response = self.client.get('http://random_numbers:5001/rnum')
         assert response.status_code == 200
         output = response.data 
-        assert int(output)/3 > 10
+        assert int(output) > 99 & int(output)<1001
+
+    # def test_rand_numbers(self):
+    #     with patch('requests.get') as g:
+    #         g.return_value.text = "500"
+
+    #         response = self.client.get('http://back-end:5000/add')
+    #         self.assertIn(b'q', response.data)
+    #         self.assertIn(b'500', response.data)
+    
+    
+    
+    
+    # def test_rand_numbers(self):
+    #     # with patch('requests.get') as g:
+    #     #     g.return_value.text = "700"
+    #     #     response = self.client.get('http://frontend:5003')
+    #     #     #response = self.client.get('http://back-end:5000/add')
+    #     #     assert response.status_code == 200
+    #     response = self.client.get('http://frontend:80/')
+    #     assert response.status_code == 200
+    #     # #self.assertIn(b'700', response.data)

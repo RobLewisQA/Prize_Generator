@@ -1,54 +1,107 @@
 from flask import Flask, redirect, request, url_for,render_template,jsonify
 from application import app, db, models
-from application.models import Users
+from application.models import Outcomes
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import func
 import requests
 
 
-@app.route('/')
-def hello():
-  data1 = Users.query.all()
-  return render_template('home.html', data1=data1)
-
-
-# @app.route('/users/add', methods=['GET','POST'])
-# def add_user():
-#     requests.get('http://frontend:5003/posted').text
-#     return render_template('add_user.html')
-
-@app.route('/added', methods=['GET'])
-def receive_data():
-  #new_data = requests.get('http://frontend:5003/form').text
-  return requests.get('http://frontend:5003/form').text
-
-@app.route('/add',methods=['GET','POST'])
-def add_users():
-    if request.method=='POST':
-      content = request.json
-      #response = requests.get('http://frontend:5003/posted').text
-      new_f_name = content["new_first_name"]#response.split(" ")[0]
-      new_l_name = content['new_last_name']#response.split(" ")[1]
-      new_eml = content['new_email']#response.split(" ")[2]
-      new_num = requests.get('http://random_numbers:5001/rnum').text
-      new_let = requests.get('http://random_letters:5002/rletters').text
-      new_number = str(new_num)+new_let
-      if int(new_num) < 300:
-        new_user = Users(first_name=new_f_name,last_name=new_l_name,email=new_eml,rand_number=new_number,win_lose='winner')
-        db.session.add(new_user)
-        db.session.commit()
+@app.route("/prizegen", methods = ['GET'])
+def prizegen():
+    random_number = requests.get("http://random_numbers:5001/rnum").text
+    random_letter = requests.get("http://random_letters:5002/rletters").text
+    num_letter = random_number + random_letter
+    if (int(random_number) < 300) & (random_letter == 'e'):
         outcome = 'win'
-      
-      else:
-        new_user = Users(first_name=new_f_name,last_name=new_l_name,email=new_eml,rand_number=new_number,win_lose='loser')
-        db.session.add(new_user)
-        db.session.commit()
-        outcome='lose'
-        #data = Users.query.
-      #return redirect('http://frontend:5003/home')
-    return jsonify({
-        "rand_number": new_number,
-        "rand_letter":new_let,
-        "win_lose": outcome
-      })
+        prize = 'Gold'
+    elif (int(random_number) < 300) & (random_letter == 'a' or random_letter == 'b'):
+        outcome = 'win'
+        prize = 'Silver'
+    elif (int(random_number) < 300) & (random_letter == 'c' or random_letter == 'd'):
+        outcome = 'win'
+        prize = 'Bronze'
+    else:
+        outcome = 'lose'
+        prize = 'no prize'
+    data = {"rand_number":num_letter,"win_lose":outcome,"prize":prize}
+    new_entry = Outcomes(rand_number=num_letter,win_lose=outcome,prize=prize)
+    db.session.add(new_entry)
+    db.session.commit()
+    return jsonify(data)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#@app.route('/')
+# def hello():
+#     data1 = Users.query.all()
+#     return render_template('home.html', data1=data1)
+
+
+# @app.route('/add',methods=['GET','POST'])
+# def add_users():
+#     if request.method=='POST':
+#       content = request.json
+#       new_f_name = content["new_first_name"]
+#       new_l_name = content['new_last_name']
+#       new_eml = content['new_email']
+#       new_num = requests.get('http://random_numbers:5001/rnum').text
+#       new_let = requests.get('http://random_letters:5002/rletters').text
+#       new_number = str(new_num)+new_let
+    
+#     if int(new_num) < 300 & new_let == 'a':
+#         new_user = Users(first_name=new_f_name,last_name=new_l_name,rand_number=new_number,win_lose='winner',prize='Gold')
+#         db.session.add(new_user)
+#         db.session.commit()
+#     elif int(new_num) < 300 & new_let == 'b':
+#         new_user = Users(first_name=new_f_name,last_name=new_l_name,rand_number=new_number,win_lose='winner',prize='Silver')
+#         db.session.add(new_user)
+#         db.session.commit()
+#     elif int(new_num) < 300 & new_let == 'c':
+#         new_user = Users(first_name=new_f_name,last_name=new_l_name,rand_number=new_number,win_lose='winner',prize='Bronze')
+#         db.session.add(new_user)
+#         db.session.commit()
+#     else:
+#         new_user = Users(first_name=new_f_name,last_name=new_l_name,rand_number=new_number,win_lose='loser',prize='nothing')
+#         db.session.add(new_user)
+#         db.session.commit()
+    
+#     data = {"rand_number":new_number,"rand_letter":new_let,"win_lose":outcome}
+#     requests.post('http://frontend:5003/results', json = data)
+    
+#     #return redirect('http://frontend:5003/')
+#     return jsonify({"rand_number": new_number}, {"rand_letter":new_let}, {"win_lose": outcome})
+    
+    
+    
+ 
+# @app.route('/submit',methods=['GET','POST'])
+# def database_sub():
+#   if request.method=='POST':
+#       content = request.json
+#       new_f_name = content["new_first_name"]
+#       new_l_name = content['new_last_name']
+#       names = {"first_name":new_f_name,"last_name":new_l_name}
+#       jsonify(names)
+#       requests.post(url_for('prizegen'), json = json)
+#       return redirect('http://fronend:5003/prize-board')
+
+    
 

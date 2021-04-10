@@ -10,11 +10,9 @@ class TestBase(TestCase):
 
 class TestResponse(TestBase):
 
-    def test_rand_numbers(self):
-    # We will mock a response of 1 and test that we get football returned.
+    def test_rand_letters(self):
         with patch('requests.get') as g:
             g.return_value.text = "c"
-
             response = self.client.get('http://back-end:5000')
             self.assertIn(b'c', response.data)
 

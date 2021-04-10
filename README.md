@@ -39,11 +39,30 @@
 ## Risk Assessment
 Description | Evaluation | Likelihood | Impact Level | Responsibility | Response | Control Mearues
 | --- | --- | --- | --- | --- | --- | --- |
-Application's virtual compute machine goes down | Application goes offline | Low | High | GCP | Spin up a new vm instance either in GCP or an alternative cloud provider and clone the Github repo to integrate with Jenkins | Keep an up-to-date source code on Github
-Application's virtual MySQL machine goes down | Application becomes unusable | Low | High | GCP | Spin up a new vm instance in GCP and update the configurations with SQLAlchemy and the virtual compute machine | Keep a backup database
+All application virtual compute machine goes down due to cloud host failure | Application goes offline | Low | High | GCP | Spin up a new vm instance either in GCP or an alternative cloud provider and clone the Github repo to integrate with Jenkins | Keep an up-to-date source code on Github
+
+Application's virtual MySQL machine goes down | Application stays up but database recording fails. All services besides remain in tact | Low | High | GCP | Spin up a new vm instance in GCP and update the configurations with SQLAlchemy and the virtual compute machine | Keep a backup database
+
 The Python language is updated to a new version | The application may not run if Flask and SQLAlchemy are not updated for compatibility | Medium | Medium | Developers | Run the application on Python 3 and phase in an updated version in CI | Keep a robust Github repo so that the source code can be continuously improved and use Jenkins to manage the integration and deployment
+
 Versions of libraries are updated and compatability issues are not mitigated | Some aspects of the application may fail | Medium | High | Developers | Update the requirements.txt to specify the exact versions required | Keep track of planned updates to key libraries, and specify the versions of some of the key libraries required for function
-The port that the application runs on changes | The app stops working | Low | High | CI Engineers/Operators | Update the firewall settings in the cloud provider to allow a different port access | Use Jenkins to manage continuous integration in the app, and notify when there are launch issues
+
+The ports that the application uses change | The app stops working | Low | High | CI Engineers/Operators | Update the firewall settings in the cloud provider to allow a different port access | Use Jenkins to manage continuous integration in the app, and notify when there are launch issues
+
+Jenkins installation or pipeline support fails | Jenkinsfile unreadable, deployment must be done manually. Secrets held in Jenkins may cause the entire app to fail if affected | M | --- | --- | --- | ---
+
+Run out of money/credit to support a swarm of machines | The deployment can work with only a manager - may need to update the inventory and roles in ansible | --- | --- | --- | --- | ---
+
+Ansible installation fails or changes function critically | The swarm can still be deployed manually | --- | --- | --- | --- | ---
+
+An unintentional push to github is made to the webhooks branch | The commit is unlikely to bring the app down, but could reveal valuable data, bugs or backdoors | --- | --- | --- | --- | ---
+
+The logic is changed to a service such that a test is failed | Pytest will exit any jenkins pipeline deployment | --- | --- | --- | --- | ---
+
+The database name or location changes | The app will work, but the environment variable stored in jenkins will  | --- | --- | --- | --- | ---
+
+Docker installation | --- | --- | --- | --- | --- | ---
+
 
 ## Development workflow:
 >To see a kanban Trello board of the development process workflow, click [here](https://trello.com/b/h1v0LX39/lottery)
