@@ -23,5 +23,4 @@ class TestResponse(TestBase):
             m.get("http://back-end:5000/prizegen", text = '{"prize":"no prize","rand_number":"401e","win_lose":"lose"}')
             response = self.client.get(url_for('frontend'))
             assert response.status_code == 200
-            self.assertIn(b'lose', response.data)
-            self.assertIn(b'no prize', response.data)
+            self.assertIn(b'lost', response.data)
