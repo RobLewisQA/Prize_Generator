@@ -105,4 +105,7 @@ def home():
     #     return render_template('main.html', data=prize)
     # else:
     #     return 'Try again!'
-    return render_template('main.html', data=data)#submission_response
+    if data.outcome == 'win':
+        return render_template('winner.html', data=data)
+    else:
+        render_template('loser.html', data=data)
