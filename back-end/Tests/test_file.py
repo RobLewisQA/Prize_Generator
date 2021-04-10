@@ -18,7 +18,7 @@ class TestBase(TestCase):
     def setUp(self):
         db.create_all()
         test_outcome = Outcomes(rand_number='345a',win_lose='lose',prize='no prize')
-        db.session.add(ptest_outcome)
+        db.session.add(test_outcome)
         db.session.commit()
 
     def tearDown(self):
