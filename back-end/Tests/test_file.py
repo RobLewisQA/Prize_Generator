@@ -3,7 +3,7 @@ from flask import url_for
 from flask_testing import TestCase
 from flask_sqlalchemy import SQLAlchemy
 from application import app, db
-from application.models import Users
+from application.models import Outcomes
 from os import getenv
 import requests_mock
 
@@ -18,7 +18,7 @@ class TestBase(TestCase):
 
     def setUp(self):
         db.create_all()
-        sample_insertion = Users(rand_number='345a',win_lose='lose',prize='no prize')
+        sample_insertion = Outcomes(rand_number='345a',win_lose='lose',prize='no prize')
         db.session.add(sample_insertion)
         db.session.commit()
 
