@@ -96,5 +96,3 @@ def home():
     # else:
     #     return 'Try again!'
     return submission_response
-
-print('dskghflafij')
