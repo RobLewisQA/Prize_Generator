@@ -35,47 +35,47 @@ def add_user():
 
 
 
-@app.route('/prize_page')
-def prize_page():
-    response = requests.get('http://back-end:5000/').text
-    return response
+# @app.route('/prize_page')
+# def prize_page():
+#     response = requests.get('http://back-end:5000/').text
+#     return response
 
 
     
-@app.route('/win', methods=['GET','POST'])
-def lottery_engine():
-    if request.method=='POST':
-        first_name_n = request.form['first_name']
-        last_name_n = request.form['last_name']
-        new_num = requests.get('http://random_numbers:5001/rnum').text
-        new_let = requests.get('http://random_letters:5002/rletters').text
-        number = str(new_num)+new_let
-        if int(new_num) < 300:
-            outcome = 'win'
-            prize = 'Gold'
+# @app.route('/win', methods=['GET','POST'])
+# def lottery_engine():
+#     if request.method=='POST':
+#         first_name_n = request.form['first_name']
+#         last_name_n = request.form['last_name']
+#         new_num = requests.get('http://random_numbers:5001/rnum').text
+#         new_let = requests.get('http://random_letters:5002/rletters').text
+#         number = str(new_num)+new_let
+#         if int(new_num) < 300:
+#             outcome = 'win'
+#             prize = 'Gold'
         
-        elif int(new_num) < 300 & (new_let == 'a' or new_let == 'b'):
-            outcome = 'win'
-            prize = 'Silver'
+#         elif int(new_num) < 300 & (new_let == 'a' or new_let == 'b'):
+#             outcome = 'win'
+#             prize = 'Silver'
 
-        elif int(new_num) < 300 & (new_let == 'c' or new_let == 'd'):
-            outcome = 'win'
-            prize = 'Bronze'
-        else:
-            outcome = 'lose'
-            prize = 'no prize'
+#         elif int(new_num) < 300 & (new_let == 'c' or new_let == 'd'):
+#             outcome = 'win'
+#             prize = 'Bronze'
+#         else:
+#             outcome = 'lose'
+#             prize = 'no prize'
         
-        data2={
-            "new_first_name": new_num,
-            "new_last_name":new_let,
-            "new_number" : number,
-            "win_lose": outcome,
-            "prize_won" : prize
-            }
-        data1 = {"new_first_name":first_name_n, "new_last_name":last_name_n, "win_lose":outcome, "prize_won": prize, "new_number":number}
-        requests.post(url_for('databse_sub'), json = data1)
+#         data2={
+#             "new_first_name": new_num,
+#             "new_last_name":new_let,
+#             "new_number" : number,
+#             "win_lose": outcome,
+#             "prize_won" : prize
+#             }
+#         data1 = {"new_first_name":first_name_n, "new_last_name":last_name_n, "win_lose":outcome, "prize_won": prize, "new_number":number}
+#         requests.post(url_for('databse_sub'), json = data1)
     
-    return ''
+#     return ''
 
 
 
@@ -94,3 +94,5 @@ def home():
         return render_template('main.html', data=prize)
     else:
         return 'Try again!'
+
+print('dskghflafij')
