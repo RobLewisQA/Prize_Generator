@@ -96,7 +96,7 @@ def form_sub():
 @app.route("/prize-board", methods=['GET'])
 def home():
 
-    submission_response=requests.get("http://back-end:5000/prizegen").text
+    data=requests.get("http://back-end:5000/prizegen").json()
     # number = f'{submission_response["rand_number"]}'
     # letter = f'{submission_response["rand_letter"]}'
     # win_lose = f'{submission_response["win_lose"]}'
@@ -105,4 +105,4 @@ def home():
     #     return render_template('main.html', data=prize)
     # else:
     #     return 'Try again!'
-    return submission_response
+    return render_template('main.html', data=data)#submission_response
