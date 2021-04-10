@@ -108,4 +108,4 @@ def home():
     if data["win_lose"] == 'win':
         return render_template('winner.html', data=data)
     else:
-        render_template('loser.html', data=data)
+        return render_template('loser.html', data=data)
