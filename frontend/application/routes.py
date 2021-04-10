@@ -85,14 +85,16 @@ def win_form():
 
 @app.route("/prize-board", methods=['GET'])
 def home():
+
     submission_response=requests.get("http://back-end:5000/prizegen").text
-    number = f'{submission_response["rand_number"]}'
-    letter = f'{submission_response["rand_letter"]}'
-    win_lose = f'{submission_response["win_lose"]}'
-    prize = f'{submission_response["prize"]}'
-    if win_lose == 'win':
-        return render_template('main.html', data=prize)
-    else:
-        return 'Try again!'
+    # number = f'{submission_response["rand_number"]}'
+    # letter = f'{submission_response["rand_letter"]}'
+    # win_lose = f'{submission_response["win_lose"]}'
+    # prize = f'{submission_response["prize"]}'
+    # if win_lose == 'win':
+    #     return render_template('main.html', data=prize)
+    # else:
+    #     return 'Try again!'
+    return submission_response
 
 print('dskghflafij')
