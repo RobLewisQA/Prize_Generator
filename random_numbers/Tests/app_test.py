@@ -16,13 +16,13 @@ class TestResponse(TestBase):
         output = response.data 
         assert int(output) > 99 & int(output)<1001
 
-    def test_rand_numbers(self):
-        with patch('requests.get') as g:
-            g.return_value.text = "500"
+    # def test_rand_numbers(self):
+    #     with patch('requests.get') as g:
+    #         g.return_value.text = "500"
 
-            response = self.client.get('http://back-end:5000/add')
-            self.assertIn(b'q', response.data)
-            self.assertIn(b'500', response.data)
+    #         response = self.client.get('http://back-end:5000/add')
+    #         self.assertIn(b'q', response.data)
+    #         self.assertIn(b'500', response.data)
     
     
     
