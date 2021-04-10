@@ -6,6 +6,7 @@ services:
     build: ./back-end
     ports:
     - target: 5000
+      published: 5000
       protocol: tcp
     environment: 
       DATABASE_URI: ${DATABASE_URI}
@@ -27,6 +28,7 @@ services:
     build: ./random_numbers
     ports:
     - target: 5001
+      target: 5001
       protocol: tcp
 
   random_letters:
@@ -35,6 +37,7 @@ services:
     build: ./random_letters
     ports:
     - target: 5002
+      target: 5002
       protocol: tcp
 
   frontend:
