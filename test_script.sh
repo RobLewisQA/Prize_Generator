@@ -1,5 +1,7 @@
 #!/bin/bash
 
+pip3 install requests_mock
+
 cd Prize_Generator
 
 pytest random_letters --cov=application 
