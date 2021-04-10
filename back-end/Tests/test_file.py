@@ -34,7 +34,7 @@ class TestBackend(TestBase):    # testing submission to the database
     def test_backend_lose(self):    # testing the backend for output
         with requests_mock.mock() as m:    
             response = self.client.get(url_for('prizegen'))
-            assert ('win' in response.data) or assert ('lose' in response.data)
+            assert ('win' in response.data) or ('lose' in response.data)
     
     def test_backend_goldwin(self):    # testing the backend output given a gold-winning output from the two middle services
         with requests_mock.mock() as m:
