@@ -86,7 +86,7 @@ def prizegen():
         outcome = 'lose'
         prize = 'no prize'
 
-    data = {"rand_number":num_letter,"win_lose":outcome,"prize":prize}
+    data = {"name":(new_f_name + " " + new_l_name),"rand_number":num_letter,"win_lose":outcome,"prize":prize}
     #new_user = Users(first_name=new_f_name,last_name=new_l_name,rand_number=new_number,win_lose=outcome,prize=prize_taken)
     #db.session.add(new_entry)
     #db.session.commit()
