@@ -42,6 +42,30 @@ class TestViews(TestBase):
             self.assertIn(b'lose', response.data)
             self.assertIn(b'no prize', response.data)
     
+    def test_backend_goldwin(self):
+        with requests_mock.mock() as m:
+            m.get("http://random_numbers:5001/rnum", text = "201")
+            m.get("http://random_letters:5002/rletters", text = "e")
+            response = self.client.get(url_for('prizegen'))
+            self.assertIn(b'win', response.data)
+            self.assertIn(b'Gold', response.data)
+    
+    def test_backend_silverwin(self):
+        with requests_mock.mock() as m:
+            m.get("http://random_numbers:5001/rnum", text = "207")
+            m.get("http://random_letters:5002/rletters", text = "d")
+            response = self.client.get(url_for('prizegen'))
+            self.assertIn(b'win', response.data)
+            self.assertIn(b'Silver', response.data)
+
+    def test_backend_silverwin(self):
+        with requests_mock.mock() as m:
+            m.get("http://random_numbers:5001/rnum", text = "131")
+            m.get("http://random_letters:5002/rletters", text = "a")
+            response = self.client.get(url_for('prizegen'))
+            self.assertIn(b'win', response.data)
+            self.assertIn(b'Silver', response.data)
+    
     def test_frontend_integration(self):
         with requests_mock.mock() as m:
             m.get("http://random_numbers:5001/rnum", text = "500")
@@ -50,8 +74,8 @@ class TestViews(TestBase):
             self.assertEqual(response.status_code, 200)
             self.assertIn(b'lose', response.data)
 
-            response1 = self.client.get("http://frontend:5003/prize-board")
-            self.assertEqual(response1.status_code, 200)
+            #response1 = self.client.get("http://frontend:5003/prize-board")
+            #self.assertEqual(response1.status_code, 200)
 
     
 

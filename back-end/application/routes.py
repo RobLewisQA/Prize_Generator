@@ -11,7 +11,7 @@ def prizegen():
     random_number = requests.get("http://random_numbers:5001/rnum").text
     random_letter = requests.get("http://random_letters:5002/rletters").text
     num_letter = random_number + random_letter
-    if int(random_number) < 300:
+    if int(random_number) < 300 & (random_letter == 'e'):
         outcome = 'win'
         prize = 'Gold'
     elif int(random_number) < 300 & (random_letter == 'a' or random_letter == 'b'):
