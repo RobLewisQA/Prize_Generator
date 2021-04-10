@@ -7,6 +7,8 @@ from application.models import Outcomes
 import requests
 
 class TestBase(TestCase):
+    
+    return app
     # def create_app(self):
     #     app.config.update(SQLALCHEMY_DATABASE_URI="sqlite:///",
     #             SECRET_KEY='MY_Passeordsa',
@@ -15,15 +17,15 @@ class TestBase(TestCase):
     #             )
     #     return app
 
-    def setUp(self):
-        db.create_all()
-        sample_insertion = Outcomes(rand_number='345a',win_lose='lose',prize='no prize')
-        db.session.add(sample_insertion)
-        db.session.commit()
+    # def setUp(self):
+    #     db.create_all()
+        # sample_insertion = Outcomes(rand_number='345a',win_lose='lose',prize='no prize')
+        # db.session.add(sample_insertion)
+        # db.session.commit()
 
-    def tearDown(self):
-        db.session.remove()
-        db.drop_all()
+    # def tearDown(self):
+    #     db.session.remove()
+    #     db.drop_all()
 
 class TestViews(TestBase):
     # def test_view_db(self):
