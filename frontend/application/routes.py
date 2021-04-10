@@ -20,8 +20,7 @@ def add_user():
     if request.method=='POST':
         first_name_n = request.form['first_name']
         last_name_n = request.form['last_name']
-        email_n = request.form['email']
-        data = {"new_first_name":first_name_n, "new_last_name":last_name_n, "new_email":email_n}
+        data = {"new_first_name":first_name_n, "new_last_name":last_name_n}
         requests.post('http://back-end:5000/add', json = data)
         return redirect('/')
 
