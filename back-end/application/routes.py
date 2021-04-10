@@ -44,11 +44,7 @@ def add_users():
     requests.post('http://frontend:5003/results', json = data)
     
     #return redirect('http://frontend:5003/')
-  return jsonify({
-        "rand_number": new_number,
-        "rand_letter":new_let,
-      "win_lose": outcome
-    })
+    return jsonify({"rand_number": new_number, "rand_letter":new_let, "win_lose": outcome})
     
     
     
