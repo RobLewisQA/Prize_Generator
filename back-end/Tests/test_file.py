@@ -34,7 +34,7 @@ class TestViews(TestBase):
     #     self.assertIn(b'lose', response.data)
     #     self.assertIn(b'no prize', response.data)
     
-    def test_backend_config(self):
+    def test_backend_lose(self):
         with requests_mock.mock() as m:
             m.get("http://random_numbers:5001/rnum", text = "500")
             m.get("http://random_letters:5002/rletters", text = "a")

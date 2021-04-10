@@ -84,17 +84,17 @@ def win_form():
     return render_template('add.html')
 '''
 
-@app.route('/form-sub', methods=['GET','POST'])
-def form_sub():
-    if request.method=='POST':
-        first_name_n = request.form['first_name']
-        last_name_n = request.form['last_name']
-        data = {"new_first_name":first_name_n, "new_last_name":last_name_n}
-        requests.post('http://back-end:5000/prizegen', json = data)
-        return redirect('prizeboard')
+# @app.route('/form-sub', methods=['GET','POST'])
+# def form_sub():
+#     if request.method=='POST':
+#         first_name_n = request.form['first_name']
+#         last_name_n = request.form['last_name']
+#         data = {"new_first_name":first_name_n, "new_last_name":last_name_n}
+#         requests.post('http://back-end:5000/prizegen', json = data)
+#         return redirect('prizeboard')
 
 @app.route("/prize-board", methods=['GET'])
-def home():
+def frontend():
     data=requests.get("http://back-end:5000/prizegen").json()
     if data["win_lose"] == 'win':
         return render_template('winner.html', data=data)
