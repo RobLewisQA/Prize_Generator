@@ -62,6 +62,8 @@ The logic is changed to a service such that a test is failed | Pytest will exit 
 The database name or location changes | The app will work, but the environment variable stored in jenkins will  | --- | --- | --- | --- | ---
 
 Docker installation | --- | --- | --- | --- | --- | ---
+
+
 ## Development workflow:
 >To see a kanban Trello board of the development process workflow, click [here](https://trello.com/b/h1v0LX39/lottery)
 

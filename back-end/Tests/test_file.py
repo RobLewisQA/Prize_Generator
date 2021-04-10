@@ -27,8 +27,9 @@ class TestBase(TestCase):
 
 class TestBackend(TestBase):    # testing submission to the database
     def test_backend_engine(self):
-        response = self.client.get(url_for('prizegen'))
+        response = Outcomes.query.all()
         self.assertEqual(response.status_code, 200)
+        self.assertIn(b"345a", response.data)
 
     
     def test_backend_lose(self):    # testing the backend for output
