@@ -28,12 +28,12 @@ class TestBase(TestCase):
 class TestBackend(TestBase):    # testing submission to the database
     def test_backend_engine(self):
         response = Outcomes.query.all()
-        self.assertIn(b"345a", response.data)
+        assert '345a' in response
 
     
     def test_backend_lose(self):    # testing the backend for output
         with requests_mock.mock() as m:    
-            response = self.client.get(url_for('prizegen'))
+            response = self.client.get("http://back-end:5000/prizegen")
             assert ('win' in response.data) or ('lose' in response.data)
     
     def test_backend_goldwin(self):    # testing the backend output given a gold-winning output from the two middle services
@@ -48,7 +48,7 @@ class TestBackend(TestBase):    # testing submission to the database
         with requests_mock.mock() as m:
             m.get("http://random_numbers:5001/rnum", text = "207")
             m.get("http://random_letters:5002/rletters", text = "a")
-            response = self.client.get(url_for('prizegen'))
+            response = self.client.get("http://back-end:5000/prizegen")
             self.assertIn(b'win', response.data)
             self.assertIn(b'Silver', response.data)
 
@@ -56,7 +56,7 @@ class TestBackend(TestBase):    # testing submission to the database
         with requests_mock.mock() as m:
             m.get("http://random_numbers:5001/rnum", text = "131")
             m.get("http://random_letters:5002/rletters", text = "c")
-            response = self.client.get(url_for('prizegen'))
+            response = self.client.get("http://back-end:5000/prizegen")
             self.assertIn(b'win', response.data)
             self.assertIn(b'Bronze', response.data)
     
