@@ -7,13 +7,13 @@ from application.models import Outcomes
 import requests
 
 class TestBase(TestCase):
-    def create_app(self):
-        app.config.update(SQLALCHEMY_DATABASE_URI="sqlite:///",
-                SECRET_KEY='MY_Passeordsa',
-                DEBUG=True,
-                WTF_CSRF_ENABLED=False
-                )
-        return app
+    # def create_app(self):
+    #     app.config.update(SQLALCHEMY_DATABASE_URI="sqlite:///",
+    #             SECRET_KEY='MY_Passeordsa',
+    #             DEBUG=True,
+    #             WTF_CSRF_ENABLED=False
+    #             )
+    #     return app
 
     def setUp(self):
         db.create_all()
@@ -26,12 +26,12 @@ class TestBase(TestCase):
         db.drop_all()
 
 class TestViews(TestBase):
-    def test_view_db(self):
-        response = self.client.get(url_for('prizegen'))
-        self.assertEqual(response.status_code, 200)
-        self.assertIn(b'345a', response.data)
-        self.assertIn(b'lose', response.data)
-        self.assertIn(b'no prize', response.data)
+    # def test_view_db(self):
+    #     response = self.client.get(url_for('prizegen'))
+    #     self.assertEqual(response.status_code, 200)
+    #     self.assertIn(b'345a', response.data)
+    #     self.assertIn(b'lose', response.data)
+    #     self.assertIn(b'no prize', response.data)
     
     def test_backend_config(self):
         with requests_mock.mock() as m:
