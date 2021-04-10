@@ -10,13 +10,6 @@ def frontend():
     response = requests.get('http://back-end:5000').text
     return response #render_template('home.html', data1=data1)
 
-# @app.route('/results', methods = ['GET','POST'])
-# def results():
-#     content = request.json
-#     random_number = content["rand_number"]
-#     random_letter = content['rand_letter']
-#     outcome = content['win_lose']
-#     return str(content)
 
 @app.route('/user/add', methods=['GET','POST'])
 def add_users():
