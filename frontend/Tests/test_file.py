@@ -4,6 +4,7 @@ from flask_testing import TestCase
 from flask_sqlalchemy import SQLAlchemy
 from application import app
 from flask import Flask, redirect, request, url_for,render_template
+import requests_mock
 
 
 class TestBase(TestCase):
