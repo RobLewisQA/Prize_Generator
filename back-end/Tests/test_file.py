@@ -7,32 +7,29 @@ from application.models import Outcomes
 import requests_mock
 
 class TestBase(TestCase):
-    
     def create_app(self):
-    #     app.config.update(SQLALCHEMY_DATABASE_URI="sqlite:///",
-    #             SECRET_KEY='MY_Passeordsa',
-    #             DEBUG=True,
-    #             WTF_CSRF_ENABLED=False
-    #             )
+        app.config.update(SQLALCHEMY_DATABASE_URI="sqlite:///",
+                SECRET_KEY='TESTKEY',
+                DEBUG=True,
+                WTF_CSRF_ENABLED=False
+                )
         return app
 
-    # def setUp(self):
-    #     db.create_all()
-        # sample_insertion = Outcomes(rand_number='345a',win_lose='lose',prize='no prize')
-        # db.session.add(sample_insertion)
-        # db.session.commit()
+    def setUp(self):
+        db.create_all()
+        test_outcome = Outcomes(rand_number='345a',win_lose='lose',prize='no prize')
+        db.session.add(ptest_outcome)
+        db.session.commit()
 
-    # def tearDown(self):
-    #     db.session.remove()
-    #     db.drop_all()
+    def tearDown(self):
+        db.session.remove()
+        db.drop_all()
 
-class TestViews(TestBase):
-    # def test_view_db(self):
-    #     response = self.client.get(url_for('prizegen'))
-    #     self.assertEqual(response.status_code, 200)
-    #     self.assertIn(b'345a', response.data)
-    #     self.assertIn(b'lose', response.data)
-    #     self.assertIn(b'no prize', response.data)
+class TestBackend(TestBase):    # testing submission to the database
+    def test_backend_engine(self):
+        response = self.client.get(url_for('prizegen'))
+        self.assertEqual(response.status_code, 200)
+
     
     def test_backend_lose(self):    # testing the backend for output
         with requests_mock.mock() as m:    
@@ -73,27 +70,3 @@ class TestViews(TestBase):
 
             #response1 = self.client.get("http://frontend:5003/prize-board")
             #self.assertEqual(response1.status_code, 200)
-
-    
-
-        
-
-
-
-# class TestResponse(TestBase):
-#     def test_backend_logic(self):
-#         data = {"new_first_name":"jack", "new_last_name":"jackson", "new_email":"jj@test.com"}
-#         response = self.client.post(url_for('add_users'), json = data)
-        
-        
-#         with requests_mock.mock() as g:
-#             g.get('http://random_numbers:5001/rnum', text = '500')
-#             g.get('http://random_letters:5002/rletters', text = 'b')
-#             self.assertEqual(200, response.status_code)
-
-
-
-#########
-
-#new_num = requests.get('http://random_numbers:5001/rnum').text
-#new_let = requests.get('http://random_letters:5002/rletters').text
