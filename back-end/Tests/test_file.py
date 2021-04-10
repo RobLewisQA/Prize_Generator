@@ -30,6 +30,12 @@ class TestViews(TestBase):
         response = self.client.get(url_for('prizegen'))
         self.assertEqual(response.status_code, 200)
         self.assertIn(b'345a', response.data)
+        self.assertIn(b'lose', response.data)
+        self.assertIn(b'no prize', response.data)
+    
+    #def test_backend_config(self):
+
+        
 
 
 
