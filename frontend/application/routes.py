@@ -40,9 +40,7 @@ def prize_page():
     response = requests.get('http://back-end:5000/').text
     return response
 
-@app.route('/makemeawinner', methods=['GET','POST'])
-def win_form():
-    return render_template('add.html')
+
     
 @app.route('/win', methods=['GET','POST'])
 def lottery_engine():
@@ -80,6 +78,10 @@ def lottery_engine():
     return ''
 
 
+
+@app.route('/makemeawinner', methods=['GET','POST'])
+def win_form():
+    return render_template('add.html')
 
 @app.route("/prize-board", methods=['GET'])
 def home():
