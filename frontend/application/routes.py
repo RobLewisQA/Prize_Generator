@@ -76,22 +76,10 @@ def lottery_engine():
             }
         data1 = {"new_first_name":first_name_n, "new_last_name":last_name_n, "win_lose":outcome, "prize_won": prize, "new_number":number}
         requests.post(url_for('databse_sub'), json = data1)
-        
-        
-        
+    
     return ''
-        # return jsonify({
-        #   "rand_number": new_num,
-        #   "rand_letter":new_let,
-        #   "win_lose": outcome,
-        #   "prize_won" : prize
-        #  })
 
-# @app.route('/prize-board')
-# def prize_board():
-#     response = lottery_engine()
-#     #response = requests.get('http://back-end:5000').text
-#     return str(response["rand_number"])
+
 
 @app.route("/prize-board", methods=['GET'])
 def home():
