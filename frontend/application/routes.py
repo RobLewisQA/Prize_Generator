@@ -90,7 +90,7 @@ def home():
     letter = f'{submission_response["rand_letter"]}'
     win_lose = f'{submission_response["win_lose"]}'
     prize = f'{submission_response["prize"]}'
-    if win_lose = 'win':
+    if win_lose == 'win':
         return render_template('main.html', data=prize)
     else:
         return 'Try again!'
