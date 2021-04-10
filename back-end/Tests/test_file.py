@@ -4,7 +4,7 @@ from flask_testing import TestCase
 from flask_sqlalchemy import SQLAlchemy
 from application import app, db
 from application.models import Outcomes
-import requests
+import requests_mock
 
 class TestBase(TestCase):
     
