@@ -35,8 +35,10 @@ def add_user():
 
 
 
-
-
+@app.route('/prize_page')
+def prize_page():
+    response = requests.get('http://back-end:5000/').text
+    return response
 
 @app.route('/makemeawinner', methods=['GET','POST'])
 def win_form():
@@ -73,16 +75,11 @@ def lottery_engine():
             "prize_won" : prize
             }
         data1 = {"new_first_name":first_name_n, "new_last_name":last_name_n, "win_lose":outcome, "prize_won": prize, "new_number":number}
-        requests.post(url_for('databse_sub'), json = data2)
+        requests.post(url_for('databse_sub'), json = data1)
         
         
         
-        return {
-          "rand_number": new_num,
-          "rand_letter":new_let,
-          "win_lose": outcome,
-          "prize_won" : prize
-         }
+        return 
         # return jsonify({
         #   "rand_number": new_num,
         #   "rand_letter":new_let,
@@ -90,8 +87,20 @@ def lottery_engine():
         #   "prize_won" : prize
         #  })
 
-@app.route('/prize-board')
-def prize_board():
-    response = lottery_engine()
-    #response = requests.get('http://back-end:5000').text
-    return str(response["rand_number"])
+# @app.route('/prize-board')
+# def prize_board():
+#     response = lottery_engine()
+#     #response = requests.get('http://back-end:5000').text
+#     return str(response["rand_number"])
+
+@app.route("/prize-board", methods=['GET'])
+def home():
+    submission_response=requests.get("http://back-end:5000/prizegen").json()
+    number = f'{submission_response["rand_number"]}'
+    letter = f'{submission_response["rand_letter"]}'
+    win_lose = f'{submission_response["win_lose"]}'
+    prize = f'{submission_response["prize"]}'
+    if win_lose = 'win':
+        return render_template('main.html', data=prize)
+    else:
+        return 'Try again!'

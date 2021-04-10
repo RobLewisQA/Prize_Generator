@@ -86,6 +86,33 @@ def database_sub():
 
     return ''
 
+
+@app.route("/prizegen")
+  def home():
+    random_number = requests.get("http://random_numbers:5001/rnum").text
+    random_letter = requests.get("http://random_letters:5002/rletters").text
+    num_letter = random_number + random_letter
+    if int(new_num) < 300:
+      outcome = 'win'
+      prize = 'Gold'
+        
+    elif int(new_num) < 300 & (new_let == 'a' or new_let == 'b'):
+      outcome = 'win'
+      prize = 'Silver'
+
+    elif int(new_num) < 300 & (new_let == 'c' or new_let == 'd'):
+      outcome = 'win'
+      prize = 'Bronze'
+    else:
+      outcome = 'lose'
+      prize = 'no prize'
+
+    data = {"rand_number":num_letter,"win_lose":outcome,"prize":prize}
+    new_user = Users(first_name=new_f_name,last_name=new_l_name,rand_number=new_number,win_lose=outcome,prize=prize_taken)
+    db.session.add(new_entry)
+    db.session.commit()
+    return jsonify(data)
+
     
     
 
