@@ -5,7 +5,7 @@ import random
 @app.route('/rletters', methods=['GET'])
 def rletters_generator():
     letters = ['a','b','c','d','e']
-    num = random.randint(0,5)
+    num = random.randint(0,4)
 
     return f'{letters[num]}'
 
