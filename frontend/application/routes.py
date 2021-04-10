@@ -85,7 +85,7 @@ def win_form():
 
 @app.route("/prize-board", methods=['GET'])
 def home():
-    submission_response=requests.get("http://back-end:5000/prizegen").json()
+    submission_response=requests.get("http://back-end:5000/prizegen").text
     number = f'{submission_response["rand_number"]}'
     letter = f'{submission_response["rand_letter"]}'
     win_lose = f'{submission_response["win_lose"]}'
