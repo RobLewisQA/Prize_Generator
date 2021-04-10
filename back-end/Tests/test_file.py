@@ -8,14 +8,13 @@ import requests
 
 class TestBase(TestCase):
     
-    return app
-    # def create_app(self):
+    def create_app(self):
     #     app.config.update(SQLALCHEMY_DATABASE_URI="sqlite:///",
     #             SECRET_KEY='MY_Passeordsa',
     #             DEBUG=True,
     #             WTF_CSRF_ENABLED=False
     #             )
-    #     return app
+        return app
 
     # def setUp(self):
     #     db.create_all()
