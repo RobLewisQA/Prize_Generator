@@ -40,7 +40,7 @@ class TestBackend(TestBase):    # testing submission to the database
         with requests_mock.mock() as m:
             m.get("http://random_numbers:5001/rnum", text = "201")
             m.get("http://random_letters:5002/rletters", text = "e")
-            response = self.client.get(url_for('prizegen'))
+            response = self.client.get("http://back-end:5000/prizegen")
             self.assertIn(b'win', response.data)
             self.assertIn(b'Gold', response.data)
     
@@ -64,7 +64,7 @@ class TestBackend(TestBase):    # testing submission to the database
         with requests_mock.mock() as m:
             m.get("http://random_numbers:5001/rnum", text = "500")
             m.get("http://random_letters:5002/rletters", text = "a")
-            response = self.client.get(url_for('prizegen'))
+            response = self.client.get("http://back-end:5000/prizegen")
             self.assertEqual(response.status_code, 200)
             self.assertIn(b'lose', response.data)
 
