@@ -7,8 +7,6 @@ from application.models import Users
 from os import getenv
 import requests_mock
 
-
-
 class TestBase(TestCase):
     def create_app(self):
         app.config.update(SQLALCHEMY_DATABASE_URI="sqlite:///",
@@ -20,9 +18,7 @@ class TestBase(TestCase):
 
     def setUp(self):
         db.create_all()
-
-        sample_insertion = Users(first_name="Jane",last_name="Doe",rand_number='345a',win_lose='lose',prize='nothing')
-
+        sample_insertion = Users(rand_number='345a',win_lose='lose',prize='no prize')
         db.session.add(sample_insertion)
         db.session.commit()
 
@@ -32,29 +28,26 @@ class TestBase(TestCase):
 
 class TestViews(TestBase):
     def test_view_db(self):
-        response = self.client.get(url_for('hello'))
+        response = self.client.get(url_for('prizegen'))
         self.assertEqual(response.status_code, 200)
-        self.assertIn(b'Jane', response.data)
+        self.assertIn(b'345a', response.data)
 
 
 
-class TestResponse(TestBase):
-    def test_backend_logic(self):
-        data = {"new_first_name":"jack", "new_last_name":"jackson", "new_email":"jj@test.com"}
-        response = self.client.post(url_for('add_users'), json = data)
+# class TestResponse(TestBase):
+#     def test_backend_logic(self):
+#         data = {"new_first_name":"jack", "new_last_name":"jackson", "new_email":"jj@test.com"}
+#         response = self.client.post(url_for('add_users'), json = data)
         
         
-        with requests_mock.mock() as g:
-            g.get('http://random_numbers:5001/rnum', text = '500')
-            g.get('http://random_letters:5002/rletters', text = 'b')
-            #data = {"new_first_name":"jack", "new_last_name":"jackson", "new_email":"jj@test.com"}
-            #response = self.client.post(url_for('add_users'), json = data)
-            self.assertEqual(200, response.status_code)
-        
-        #data = {"new_first_name":"jack", "new_last_name":"jackson", "new_email":"jj@test.com"}
-        #response = self.client.post(url_for('add_users'), json = data)
-        self.assertEqual(200, response.status_code)
+#         with requests_mock.mock() as g:
+#             g.get('http://random_numbers:5001/rnum', text = '500')
+#             g.get('http://random_letters:5002/rletters', text = 'b')
+#             self.assertEqual(200, response.status_code)
 
+
+
+#########
 
 #new_num = requests.get('http://random_numbers:5001/rnum').text
 #new_let = requests.get('http://random_letters:5002/rletters').text
