@@ -8,7 +8,7 @@ import requests
 
 @app.route('/')
 def hello():
-    data1 = Users.query.order_by(desc('id')).first()
+    data1 = Users.query.all()
     return render_template('home.html', data1=data1)
 
 
