@@ -28,7 +28,7 @@ class TestBase(TestCase):
 class TestBackend(TestBase):    # testing submission to the database
     def test_backend_engine(self):
         response = Outcomes.query.all()
-        assert '345a' in response.text
+        assert '345a' in response
 
     
     def test_backend_lose(self):    # testing the backend for output
