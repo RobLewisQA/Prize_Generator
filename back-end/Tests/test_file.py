@@ -53,18 +53,18 @@ class TestViews(TestBase):
     def test_backend_silverwin(self):
         with requests_mock.mock() as m:
             m.get("http://random_numbers:5001/rnum", text = "207")
-            m.get("http://random_letters:5002/rletters", text = "d")
-            response = self.client.get(url_for('prizegen'))
-            self.assertIn(b'win', response.data)
-            self.assertIn(b'Silver', response.data)
-
-    def test_backend_silverwin(self):
-        with requests_mock.mock() as m:
-            m.get("http://random_numbers:5001/rnum", text = "131")
             m.get("http://random_letters:5002/rletters", text = "a")
             response = self.client.get(url_for('prizegen'))
             self.assertIn(b'win', response.data)
             self.assertIn(b'Silver', response.data)
+
+    def test_backend_bronzerwin(self):
+        with requests_mock.mock() as m:
+            m.get("http://random_numbers:5001/rnum", text = "131")
+            m.get("http://random_letters:5002/rletters", text = "c")
+            response = self.client.get(url_for('prizegen'))
+            self.assertIn(b'win', response.data)
+            self.assertIn(b'Bronze', response.data)
     
     def test_frontend_integration(self):
         with requests_mock.mock() as m:
