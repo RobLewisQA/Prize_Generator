@@ -38,6 +38,7 @@ class TestViews(TestBase):
         with requests_mock.mock() as m:
             m.get("http://random_numbers:5001/rnum", text = "500")
             m.get("http://random_letters:5002/rletters", text = "a")
+            response = self.client.get(url_for('prizegen'))
             self.assertIn(b'lose', response.data)
             self.assertIn(b'no prize', response.data)
     
