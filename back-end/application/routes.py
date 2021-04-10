@@ -58,9 +58,6 @@ def database_sub():
       names = {"first_name":new_f_name,"last_name":new_l_name}
       jsonify(names)
       requests.post(url_for('prizegen'), json = json)
-      # new_user = Users(first_name=new_f_name,last_name=new_l_name,rand_number=new_number,win_lose=outcome,prize=prize_taken)
-      # db.session.add(new_user)
-      # db.session.commit()
       return redirect('http://fronend:5003/prize-board')
 
 
