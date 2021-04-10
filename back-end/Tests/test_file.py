@@ -28,13 +28,13 @@ class TestBase(TestCase):
 class TestBackend(TestBase):    # testing submission to the database
     def test_backend_engine(self):
         response = Outcomes.query.all()
-        assert '345a' in response
+        assert '345a' in response.text
 
     
     def test_backend_lose(self):    # testing the backend for output
         with requests_mock.mock() as m:    
             response = self.client.get("http://back-end:5000/prizegen")
-            assert ('win' in response.data) or ('lose' in response.data)
+            assert ('win' in response.data == True) or ('lose' in response.data == True)
     
     def test_backend_goldwin(self):    # testing the backend output given a gold-winning output from the two middle services
         with requests_mock.mock() as m:
