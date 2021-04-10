@@ -28,7 +28,7 @@ services:
     build: ./random_numbers
     ports:
     - target: 5001
-      target: 5001
+      published: 5001
       protocol: tcp
 
   random_letters:
@@ -37,7 +37,7 @@ services:
     build: ./random_letters
     ports:
     - target: 5002
-      target: 5002
+      published: 5002
       protocol: tcp
 
   frontend:
