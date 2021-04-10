@@ -10,7 +10,7 @@ class TestBase(TestCase):
     def create_app(self):
         return app
 
- class TestResponse(TestBase):
+class TestResponse(TestBase):
 
 #     def test_num_generator(self):
 #         response = self.client.get('http://frontend:5003/')
