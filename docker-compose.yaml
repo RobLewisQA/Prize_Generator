@@ -2,7 +2,7 @@ version: "3.8"
 services:
   back-end:
     container_name: back-end
-    image: back-end:latest
+    image: roblewisqa/prize_project/back-end:latest
     build: ./back-end
     ports:
     - target: 5000
@@ -12,8 +12,9 @@ services:
     container_name: mysql
     build: ./db
     environment:
-      MYSQL_DATABASE: flask-db
-      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: flask-db #$(DATABASE_URI)
+      MYSQL_ROOT_PASSWORD: password #$(SECRET_KEY)
+
     ports:
     - target: 3306
       protocol: tcp
@@ -31,7 +32,7 @@ services:
   
   random_numbers:
     container_name: random_numbers
-    image: random_numbers:latest
+    image: roblewisqa/prize_project/random_numbers:latest
     build: ./random_numbers
     ports:
     - target: 5001
@@ -39,7 +40,7 @@ services:
 
   random_letters:
     container_name: random_letters
-    image: random_letters:latest
+    image: roblewisqa/prize_project/random_letters:latest
     build: ./random_letters
     ports:
     - target: 5002
@@ -47,7 +48,7 @@ services:
 
   frontend:
     container_name: frontend
-    image: frontend:latest
+    image: roblewisqa/prize_project/frontend:latest
     build: ./frontend
     ports:
     - target: 5003

@@ -1,36 +1,39 @@
-# Lottery
+# Prize Project
 ## Application Overview
-> Lottery is a web application for 
+> Prize Project is a web application for 
 
 
 
 
 ## Setup
-> The source code for the Lottery web application can be cloned from [this Github repository](https://github.com/RobLewisQA/Practical_Project). In order to run the application on Linux Ubuntu 18.04 on your localhost port, ensure that you have Python 3.6 or higher installed, as well as the python installer package, pip3. The following commands should be input in order into your Linux terminal:
+> The source code for the Prize Project web application can be cloned from [this Github repository](https://github.com/RobLewisQA/Prize_Project). In order to run the application on Linux Ubuntu 18.04 on your localhost port, ensure that you have Python 3.6 or higher installed, as well as the python installer package, pip3. The following commands should be input in order into your Linux terminal:
 1. git init
 2. git clone https://github.com/RobLewisQA/Practical_Project
-2. (cd Lottery_Project)
+2. (cd Prize_Project)
 3. sh docker_installation.sh
 4. docker-compose build
 5. docker-compose up -d  
 
 ## Technologies
 #### Cloud Server Host:
-> This web application was designed using the Google Cloud Platform to host a compute machine developed on a Linux Ubuntu 18.04 bootdisk.
+> This web application was designed using a cloud-hosted (GCP) compute machine developed on a Linux Ubuntu 20.10 bootdisk - the most recent with long-term support at the time of writing, and has been tested on Ubuntu 18.04. Earlier or later versions of Ubuntu may cause the app to behave unexpectedly, depending on support for versions of the app's dependencies.  
 #### Database format:
-> The database is a MySQL 5.7 relational database image within a Docker container. The database is integrated with SQLalchemy for reading from and writing to the database using python commands.
+> The database is a MySQL5.7 single table database image within a Docker container. The app source-code uses SQLalchemy for reading from and writing to the database using python commands.
 #### Frontend script:
-> The application uses the Flask web-development framework to allow python statements to manage HTML output for the URI routes specified in the routes file. HTML forms are used for the frontend to send post and get requests to the database in the backend.
+> The application uses the Flask web-development framework to allow python statements to manage HTML output for the URI routes specified in the routes file. HTML forms are used for the frontend to send post and get requests to the database in the backend. The html templates are constructed using Jinja2 to allow the use of variables in templating construction. The primary modules within Flask used for frontend purposes include render_template, request, url_for and jsonify. 
+#### Scripting software:
+> The logic for the random number generator, random letter generator and the backend data handling is scripted using python 3.6. The python requests library, in conjunction with the Flask API is used to send JSON data to specified routes. The Dockerfiles are scripted in GO, the docker-compose.yaml and Ansible scripts use the YAML language and the Jenkinsfile uses Declarative Pipeline (based on the Groovy syntax).
 #### Testing software:
-> This application was tested using the flask-testing, pytest and pytest-cov python libraries. The unit and configuration testing thoughouly interrogates the read, create, update and delete functions, with coverage of 83% of the entire application.
-> To replicate the testing, simply run steps 1. and 2. of the setup instructions, followed by: *pytest --cov=application*
+> This application was tested using the flask-testing, unittest, pytest, pytest-cov python libraries. The testing thoughouly interrogates the app's logic and configuration, using mock API requests and the SQLite database engine for data-submission testing. The coverage of testing is [INSERT HERE]% altogether.
+> To replicate the testing, simply run...
 #### Deployment software:
-> The application was designed and tested for deployment using Jenkins to automate Linux command execution of virtual environment generation, dependencies installation and Gunicorn web-deployment. 
+> Prize Project was designed for containerised deployment across 4 virtual machines - each machine's name and role is specified in the Ansible inventory.yaml file, so these must be followed or changed appropriately for Ansible to connect to them. Docker is the containerisation tool used for this application, and Ansible is used with Jenkins to initialise a swarm of a manager node, a worker node and an Nginx node acting as the reverse proxy as well as a load balancer. It is recommended that only the Nginx node be accessible to HTTP traffic - the script design is based on ports 5000, 5001, 5002 and 5003 being inaccessibile to public requests.
+>Continuous Deployment utilises a Jenkins pipeline to support automated deployment using Git Webhooks, so that a push to a specified branch of the repository intiates a rebuild of the app on the new source code without bringing the web-app down in the meanwhile. The Jenkins pipeline also pushes the images of containers to a Docker Hub repository before initiating the swarm deployment. This saves build time where the image already exists and can be pulled down from Docker Hub rather than rebuilt each time.
 #### Continous Integration and Version Control:
-> The source code for this application is maintained in a Github repository accessible [here](https://github.com/RobLewisQA/Practical_Project), and can be conncted to Jenkins for automatic continuous integration and deployment.
+> The source code for this application is maintained in a Github repository accessible [here](https://github.com/RobLewisQA/Prize_Project), and can be conncted to Jenkins for automatic continuous integration and deployment.
 
 ## Database Entity Relationship Diagram
-> The database for Lottery is composed of 2 tables: 
+> The database for Prize is composed of 2 tables: 
 ![chart](Tuckshop_ERD.PNG)
 
 ## Risk Assessment
@@ -46,5 +49,5 @@ The port that the application runs on changes | The app stops working | Low | Hi
 >To see a kanban Trello board of the development process workflow, click [here](https://trello.com/b/h1v0LX39/lottery)
 
 ## References:
-##### r1
-##### r2
+##### r1 - https://appfleet.com/blog/building-docker-images-to-docker-hub-using-jenkins-pipelines/ - using jenkins with dockerhub
+##### r2 - https://www.blazemeter.com/blog/how-to-integrate-your-github-repository-to-your-jenkins-project
