@@ -79,7 +79,7 @@ def lottery_engine():
         
         
         
-        return 
+        #return 
         # return jsonify({
         #   "rand_number": new_num,
         #   "rand_letter":new_let,
