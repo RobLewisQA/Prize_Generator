@@ -63,10 +63,9 @@ def database_sub():
 
 @app.route("/prizegen", methods = ['GET','POST'])
 def prizegen():
-    if request.method=='POST':
-        content = request.json
-        new_f_name = content["new_first_name"]
-        new_l_name = content['new_last_name']
+    content = request.json
+    new_f_name = content["new_first_name"]
+    new_l_name = content['new_last_name']
       
     random_number = requests.get("http://random_numbers:5001/rnum").text
     random_letter = requests.get("http://random_letters:5002/rletters").text
