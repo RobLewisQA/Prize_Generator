@@ -50,7 +50,7 @@ class TestViews(TestBase):
             self.assertEqual(response.status_code, 200)
             self.assertIn(b'lose', response.data)
 
-            response = self.client.get("http://frontend:5003")
+            response = self.client.get("http://frontend:5003/prize-board")
             self.assertIn(b'no prize', response.data)
 
     
