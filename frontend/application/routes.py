@@ -8,7 +8,7 @@ import requests
 @app.route('/')
 def frontend():
     response = requests.get('http://back-end:5000').text
-    return response #render_template('home.html', data1=data1)
+    return response + ' hello' #render_template('home.html', data1=data1)
 
 
 @app.route('/user/add', methods=['GET','POST'])
