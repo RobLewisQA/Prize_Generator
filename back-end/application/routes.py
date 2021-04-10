@@ -56,41 +56,42 @@ def add_users():
 @app.route('/submit',methods=['GET','POST'])
 def database_sub():
   if request.method=='POST':
-    content = request.json
-    new_f_name = content["new_first_name"]
-    new_l_name = content['new_last_name']
-    names = {"first_name":new_f_name,"last_name":new_l_name}
-    jsonify(names)
-    requests.post(url_for('prizegen'), json = json)
-    # new_user = Users(first_name=new_f_name,last_name=new_l_name,rand_number=new_number,win_lose=outcome,prize=prize_taken)
-    # db.session.add(new_user)
-    # db.session.commit()
-    return redirect('http://fronend:5003/prize-board')
-
-
-@app.route("/prizegen", methods = ['GET','POST'])
-  def prizegen():
-    if request.method=='POST':
       content = request.json
       new_f_name = content["new_first_name"]
       new_l_name = content['new_last_name']
+      names = {"first_name":new_f_name,"last_name":new_l_name}
+      jsonify(names)
+      requests.post(url_for('prizegen'), json = json)
+      # new_user = Users(first_name=new_f_name,last_name=new_l_name,rand_number=new_number,win_lose=outcome,prize=prize_taken)
+      # db.session.add(new_user)
+      # db.session.commit()
+      return redirect('http://fronend:5003/prize-board')
+
+
+@app.route("/prizegen", methods = ['GET','POST'])
+def prizegen():
+    if request.method=='POST':
+        content = request.json
+        new_f_name = content["new_first_name"]
+        new_l_name = content['new_last_name']
+      
     random_number = requests.get("http://random_numbers:5001/rnum").text
     random_letter = requests.get("http://random_letters:5002/rletters").text
     num_letter = random_number + random_letter
     if int(new_num) < 300:
-      outcome = 'win'
-      prize = 'Gold'
-        
+        outcome = 'win'
+        prize = 'Gold'
+      
     elif int(new_num) < 300 & (new_let == 'a' or new_let == 'b'):
-      outcome = 'win'
-      prize = 'Silver'
+        outcome = 'win'
+        prize = 'Silver'
 
     elif int(new_num) < 300 & (new_let == 'c' or new_let == 'd'):
-      outcome = 'win'
-      prize = 'Bronze'
+        outcome = 'win'
+        prize = 'Bronze'
     else:
-      outcome = 'lose'
-      prize = 'no prize'
+        outcome = 'lose'
+        prize = 'no prize'
 
     data = {"rand_number":num_letter,"win_lose":outcome,"prize":prize}
     #new_user = Users(first_name=new_f_name,last_name=new_l_name,rand_number=new_number,win_lose=outcome,prize=prize_taken)
