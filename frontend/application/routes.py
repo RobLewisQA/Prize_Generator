@@ -7,7 +7,7 @@ import requests
 
 
 
-@app.route('/makemeawinner', methods=['GET','POST'])
+@app.route('/', methods=['GET','POST'])
 def home():
     return render_template('home.html')
 
