@@ -13,12 +13,6 @@ class TestBase(TestCase):
 
 class TestResponse(TestBase):
 
-#     def test_num_generator(self):
-#         response = self.client.get('http://frontend:5003/')
-#         assert response.status_code == 200
-#         output = response.data 
-#         assertIn() 
-
     def test_backend_lose(self):    # testing the frotnend output given a losing output from the backend
         with requests_mock.mock() as m:
             m.get("http://back-end:5000/prizegen", text = '{"prize":"no prize","rand_number":"401e","win_lose":"lose"}')

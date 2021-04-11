@@ -107,3 +107,4 @@ Docker installation | --- | --- | --- | --- | --- | ---
 ##### The basis for the docker-compose script, adapted and heavily amended - https://gitlab.com/qacdevops/trio-task
 ##### Ideas for testing and parsing json from get requests into Jinja2 - https://github.com/KelvinBastow/prizegenerator
 ##### Script basis for sending the docker-compose file to the Jenkins user - https://github.com/htr-volker/ansible-jenkins/blob/master/jenkins/deploy_stack.sh
+##### With thanks to Harry Volker on testing with requests_mock.mock for patching 2 mock get requests outputs simultaneously
