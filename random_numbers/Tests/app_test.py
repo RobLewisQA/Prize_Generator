@@ -19,5 +19,3 @@ class TestResponse(TestBase):
     def test_rand_numbers(self):    # testing the response from the back-end when 500 is the output from random_numbers
         with patch('requests.get') as g:
             g.return_value.text = "500"
-            response = self.client.get('http://back-end:5000/prizegen')
-            self.assertIn(b'500', response.data)
