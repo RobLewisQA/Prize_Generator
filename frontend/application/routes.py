@@ -17,6 +17,6 @@ def frontend():
     data=requests.get("http://back-end:5000/prizegen").json()
     host_name = request.host
     if data["win_lose"] == 'win':
-        return render_template('winner.html', data=data) + "<br><br><br>" + print(host_name)
+        return render_template('winner.html', data=data)
     else:
         return render_template('loser.html', data=data)
