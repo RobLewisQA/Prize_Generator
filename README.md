@@ -69,9 +69,8 @@
 > The source code for this application is maintained in a Github repository accessible [here](https://github.com/RobLewisQA/Prize_Project), and can be conncted to Jenkins for automatic continuous integration and deployment.
 
 ## Configuration
-![chart](Configuration_Diagram.PNG)
+![chart](config_diagram.PNG)
 >As the diagram above shows, the user can only access the service through the IP adress of the Nginx machine operating at port 80 (http). Nginx then reroutes traffic 
-## Testing outcomes
 
 ## Database Entity Relationship Diagram
 > The database for Prize_Generator consists of one table with the following columns and constraints:
