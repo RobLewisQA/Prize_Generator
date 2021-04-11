@@ -6,7 +6,7 @@ from application import app, db
 from application.models import Outcomes
 import requests_mock
 
-class TestBase(TestCase):
+class TestBase(TestCase):    # create a replacement version for testing database functionality
     def create_app(self):
         app.config.update(SQLALCHEMY_DATABASE_URI="sqlite:///",
                 SECRET_KEY='TESTKEY',
@@ -68,6 +68,3 @@ class TestBackend(TestBase):    # testing submission to the database
             response = self.client.get("http://back-end:5000/prizegen")
             self.assertEqual(response.status_code, 200)
             self.assertIn(b'lose', response.data)
-
-            #response1 = self.client.get("http://frontend:5003/prize-board")
-            #self.assertEqual(response1.status_code, 200)
