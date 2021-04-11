@@ -87,23 +87,14 @@ Description | Evaluation | Likelihood | Impact Level | Responsibility | Response
 | --- | --- | --- | --- | --- | --- | --- |
 All application virtual compute machines goes down due to cloud host failure | Application goes offline | Low | High | GCP | Spin up a new vm instance either in GCP or an alternative cloud provider and clone the Github repo to integrate with Jenkins | Keep an up-to-date source code on Github
 Application's virtual MySQL machine goes down | Application stays up but database recording fails. All services besides remain in tact | Low | High | GCP | Spin up a new vm instance in GCP and update the configurations with SQLAlchemy and the virtual compute machine | Keep a backup database
-
 The Python language is updated to a new version | The application may not run if Flask and SQLAlchemy are not updated for compatibility | Medium | Medium | Developers | Run the application on Python 3 and phase in an updated version in CI | Keep a robust Github repo so that the source code can be continuously improved and use Jenkins to manage the integration and deployment
-
 Versions of libraries are updated and compatability issues are not mitigated | Some aspects of the application may fail | Medium | High | Developers | Update the requirements.txt to specify the exact versions required | Keep track of planned updates to key libraries, and specify the versions of some of the key libraries required for function
-
 The Nginx machine goes down | Traffic stops getting routed to the app | High | Low | GCP | Spin up a new machine with port 80 open and can be SSH connected to the Jenkins VM | Regularly report on the health of VMs in the cloud and their credit levels
-
 Jenkins installation or pipeline support fails | Jenkinsfile becomes unreadable and deployment must be done manually. Secrets held in Jenkins may cause the entire app to fail if affected | Low | Medium | Jenkins/Google/Linux | With few alterations, the app can work without the database, or the app is able to use a containerised database | Check up on the be ready to spin up a new Jenkins VM and port secrets over. The pipeline isn't difficult to recreate
-
 Run out of money/credit to support a swarm of machines | The deployment can work with only a manager - may need to update the inventory and roles in ansible | Medium | High | Developers | Scale the app down and rely on as few machines as possible, containerising some of the VM functions | Budget for the deployment effectively
-
 Ansible installation fails or changes function critically | The swarm can still be deployed manually, however the automatic CI/CD pipeline with webhooks will be affected | Medium | Medium | GCP/Linux/RedHat | Write bash scripts to automate as much as possible, and do the rest of the deployment manually | Update the Ansible version on the Jenkins machine when key changes are made
-
 An unintentional push to github is made to the webhooks branch | The commit is unlikely to bring the app down, but could reveal valuable data, bugs or backdoors | Depends on the push | Medium | Developers | Revert the GitHub repo and push the change  | Ensure that developers do not have easy access to the branch that triggers webhooks, create a hierarchy of decision making in the company
-
 The logic is changed to a service such that a test is failed | Pytest will exit any jenkins pipeline deployment. If previously deployed, the app should stay up | High | Low | Developers | Ensure that this doesn't prevent needed updates | Execute tests in a virtual environment as be sure that they pass before deploying to the pipeline
-
 The database name or location changes | The app will work, but the environment variable stored in jenkins will be incorrect rendering it unaccessable | Medium | Medium | GCP/Developers | Reconnect to the database at the new address. The data should be held | Check the address of the database occasionally
 
 
