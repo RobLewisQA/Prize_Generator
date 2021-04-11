@@ -48,10 +48,8 @@
 ## Risk Assessment
 Description | Evaluation | Likelihood | Impact Level | Responsibility | Response | Control Mearues
 | --- | --- | --- | --- | --- | --- | --- |
-All application virtual compute machine goes down due to cloud host failure | Application goes offline | Low | GCP | Spin up a new vm instance either in GCP or an alternative cloud provider and clone the Github repo to integrate with Jenkins | Keep an up-to-date source code on Github
-
+All application virtual compute machines goes down due to cloud host failure | Application goes offline | Low | High | GCP | Spin up a new vm instance either in GCP or an alternative cloud provider and clone the Github repo to integrate with Jenkins | Keep an up-to-date source code on Github
 Application's virtual MySQL machine goes down | Application stays up but database recording fails. All services besides remain in tact | Low | High | GCP | Spin up a new vm instance in GCP and update the configurations with SQLAlchemy and the virtual compute machine | Keep a backup database
-
 The Python language is updated to a new version | The application may not run if Flask and SQLAlchemy are not updated for compatibility | Medium | Medium | Developers | Run the application on Python 3 and phase in an updated version in CI | Keep a robust Github repo so that the source code can be continuously improved and use Jenkins to manage the integration and deployment
 
 Versions of libraries are updated and compatability issues are not mitigated | Some aspects of the application may fail | Medium | High | Developers | Update the requirements.txt to specify the exact versions required | Keep track of planned updates to key libraries, and specify the versions of some of the key libraries required for function
