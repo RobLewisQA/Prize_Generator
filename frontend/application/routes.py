@@ -6,11 +6,11 @@ import requests
 
 
 
-'''
+
 @app.route('/makemeawinner', methods=['GET','POST'])
-def win_form():
-    return render_template('add.html')
-'''
+def home():
+    return render_template('home.html')
+
 
 @app.route("/prize-board", methods=['GET'])
 def frontend():
