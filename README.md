@@ -38,6 +38,7 @@
 
 ## Database Entity Relationship Diagram
 > The database for Prize_Generator consists of one table with the following columns and constraints:
+
 Column | Constraint | Type | Notes
 | --- | --- | --- | --- |
  ID | Primary Key, Not Null | INT | Can be used to link tables if another is added to the database |
