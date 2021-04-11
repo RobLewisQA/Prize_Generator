@@ -5,3 +5,4 @@ PyMySQL==0.10.0
 requests
 pytest
 pytest-cov
+flask-testing
