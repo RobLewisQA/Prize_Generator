@@ -80,3 +80,4 @@ Docker installation | --- | --- | --- | --- | --- | ---
 ##### r1 - https://appfleet.com/blog/building-docker-images-to-docker-hub-using-jenkins-pipelines/ - using jenkins with dockerhub
 ##### r2 - https://www.blazemeter.com/blog/how-to-integrate-your-github-repository-to-your-jenkins-project
 ##### r3 - https://gitlab.com/qacdevops/trio-task - basis script adapted for docker-compose
+##### r4 - https://github.com/KelvinBastow/prizegenerator

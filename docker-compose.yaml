@@ -51,7 +51,7 @@ services:
     image: roblewisqa/frontend:latest
     build: ./frontend
     deploy:
-      replicas: 3
+      replicas: 10
     ports:
     - target: 5003
       published: 5003
