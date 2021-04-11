@@ -15,8 +15,8 @@ def win_form():
 @app.route("/prize-board", methods=['GET'])
 def frontend():
     data=requests.get("http://back-end:5000/prizegen").json()
-    host_name = print(socket.gethostname())
+    host_name = socket.gethostname()
     if data["win_lose"] == 'win':
-        return render_template('winner.html', data=data) + "<br><br><br>" + str(host_name)
+        return render_template('winner.html', data=data) + "<br><br><br>" + print(host_name)
     else:
         return render_template('loser.html', data=data)
