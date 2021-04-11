@@ -1,9 +1,13 @@
 version: "3.8"
+
+# creating a docker container for back-end with image referencing Docker Hub 
 services:
   back-end:
     container_name: back-end
     image: roblewisqa/back-end:latest
     build: ./back-end
+    deploy:
+      replicas: 3
     ports:
     - target: 5000
       published: 5000
@@ -11,39 +15,37 @@ services:
     environment: 
       DATABASE_URI: ${DATABASE_URI}
 
-  nginx:
-    image: nginx:latest
-    ports:
-    - target: 80
-      published: 80
-      protocol: tcp
-    volumes:
-    - type: bind
-      source: ./nginx/nginx.conf
-      target: /etc/nginx/nginx.conf
-  
+# creating a docker container for random_numbers with image referencing Docker Hub       
   random_numbers:
     container_name: random_numbers
     image: roblewisqa/random_numbers:latest
     build: ./random_numbers
+    deploy:
+      replicas: 3
     ports:
     - target: 5001
       published: 5001
       protocol: tcp
 
+# creating a docker container for random_letters with image referencing Docker Hub 
   random_letters:
     container_name: random_letters
     image: roblewisqa/random_letters:latest
     build: ./random_letters
+    deploy:
+      replicas: 3
     ports:
     - target: 5002
       published: 5002
       protocol: tcp
 
+# creating a docker container for frontend with image referencing Docker Hub 
   frontend:
     container_name: frontend
     image: roblewisqa/frontend:latest
     build: ./frontend
+    deploy:
+      replicas: 10
     ports:
     - target: 5003
       published: 5003

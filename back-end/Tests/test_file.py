@@ -6,7 +6,7 @@ from application import app, db
 from application.models import Outcomes
 import requests_mock
 
-class TestBase(TestCase):
+class TestBase(TestCase):    # create a replacement version for testing database functionality
     def create_app(self):
         app.config.update(SQLALCHEMY_DATABASE_URI="sqlite:///",
                 SECRET_KEY='TESTKEY',
@@ -28,13 +28,7 @@ class TestBase(TestCase):
 class TestBackend(TestBase):    # testing submission to the database
     def test_backend_engine(self):
         response = Outcomes.query.all()
-        assert '345a' in response
-
-    
-    def test_backend_lose(self):    # testing the backend for output
-        with requests_mock.mock() as m:    
-            response = self.client.get("http://back-end:5000/prizegen")
-            assert ('win' in response.data == True) or ('lose' in response.data == True)
+        self.assertEqual(response.status_code, 200) 
     
     def test_backend_goldwin(self):    # testing the backend output given a gold-winning output from the two middle services
         with requests_mock.mock() as m:
@@ -60,13 +54,10 @@ class TestBackend(TestBase):    # testing submission to the database
             self.assertIn(b'win', response.data)
             self.assertIn(b'Bronze', response.data)
     
-    def test_frontend_integration(self):    # testing the backend output given a losing output from the two middle services
+    def test_backend_lose(self):    # testing the backend output given a losing output from the two middle services
         with requests_mock.mock() as m:
             m.get("http://random_numbers:5001/rnum", text = "500")
             m.get("http://random_letters:5002/rletters", text = "a")
             response = self.client.get("http://back-end:5000/prizegen")
             self.assertEqual(response.status_code, 200)
             self.assertIn(b'lose', response.data)
-
-            #response1 = self.client.get("http://frontend:5003/prize-board")
-            #self.assertEqual(response1.status_code, 200)
