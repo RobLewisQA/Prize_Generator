@@ -40,10 +40,10 @@
 > The database for Prize_Generator consists of one table with the following columns and constraints:
 | Column | Constraint | Type | Notes |
 | --- | --- | --- |
-| ID | Primary Key, Not Null | INT | Can be used to link tables if another is added to the database |
-| rand_number | Not Null | VARCHAR (string) | denotes the output of the two middle services |
-| win_lose | Not Null | VARCHAR | Output of backend logic processes to determine if win or lose |
-| prize | None | VARCHAR | Output of backend logic to determine prize if win_lose outcome is 'win' |
+ ID | Primary Key, Not Null | INT | Can be used to link tables if another is added to the database |
+ rand_number | Not Null | VARCHAR (string) | denotes the output of the two middle services |
+ win_lose | Not Null | VARCHAR | Output of backend logic processes to determine if win or lose |
+ prize | None | VARCHAR | Output of backend logic to determine prize if win_lose outcome is 'win' |
 
 ## Risk Assessment
 Description | Evaluation | Likelihood | Impact Level | Responsibility | Response | Control Mearues
