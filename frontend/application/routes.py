@@ -1,6 +1,6 @@
 from flask import Flask, redirect, request, url_for,render_template, Response, jsonify
 from application import app#, db, models
-import platform
+from os import getenv
 from flask_sqlalchemy import SQLAlchemy
 import requests
 
@@ -15,7 +15,7 @@ def win_form():
 @app.route("/prize-board", methods=['GET'])
 def frontend():
     data=requests.get("http://back-end:5000/prizegen").json()
-    host_name = platform.node()
+    host_name = request.host
     if data["win_lose"] == 'win':
         return render_template('winner.html', data=data) + "<br><br><br>" + print(host_name)
     else:
