@@ -1,36 +1,41 @@
 pipeline {
     agent any
     environment{
-    //    DATABASE_URI = credentials('DATABASE_URI')
-          registry = "roblewisqa/prize_project"
-          registryCredential = 'dockerhub_id'
-          dockerImage = ''
+        DATABASE_URI = credentials('DATABASE_URI')
+        app_version = "version1"
+
     }
     stages {
-        // add multi-step testing stage here
-        //stage('Test') {
-        //}
         
+        // execute tests from test_script
+        stage('Test') {
+            steps{
+                sh 'bash test_script.sh'
+            }
+        }
+        // execute build based on docker-compose
         stage('Build') {
             steps{
                 sh 'docker-compose build'
             }
         }
-        //stage('Push') { 
-        //    steps{
-
-        //        }
-        //    }
-        //}
+        // execute push to Docker Hub
+        stage('Push') { 
+            steps{
+                    sh 'docker-compose push'
+                }
+            }
+        // execute ansible playbook execution referencing the inventory to configure roles to nodes in the cluster
         stage('Swarm Config') { 
             steps{
                 sh 'ansible-galaxy collection install community.docker'
                 sh 'cd ansible && ansible-playbook -i inventory.yaml playbook.yaml' 
             }
         }
+        // executing the deployment of the stack
         stage('Deploy') {
             steps{
-                sh 'docker swarm init && docker stack deploy --compose-file docker-compose.yaml prize_project'
+                sh 'bash deploy_script.sh'
             }   
         }
     }

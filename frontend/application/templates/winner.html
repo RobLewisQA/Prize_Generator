@@ -1,0 +1,16 @@
+<html>
+    <h1>
+        Congratulations!
+    </h1>
+    <body style="background-color:rgba(0, 0, 255, 0.692);">
+        <h3>You've won yourself a virtual {{ data.prize }} medal! Why not put it on your virtual mantlepiece?</h2> 
+        <br>
+        <h4>
+            <a href="{{ url_for('frontend') }}">Fancy another go?</a>
+        </h4>
+        <br>
+        <h4>
+            Your number was: {{data.rand_number}} 
+        </h2>
+    </body>
+</html>

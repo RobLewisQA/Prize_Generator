@@ -1,0 +1,18 @@
+<html>
+    <h1>Aww, shucks</h1>
+    <br>
+    <h2>
+        Looks like you lost this time
+    </h1>
+    <body style="background-color:red;"> 
+        <h3>
+            <a href="{{ url_for('frontend') }}">Fancy another go?</a>
+        </h3>
+
+        <br>
+        <br>
+        <h4>
+            Your number was: {{ data.rand_number }} 
+        </h4>
+    </body>
+</html>
