@@ -1,18 +1,38 @@
 # Prize Project
 ## Application Overview
-> Prize Project is a web application for 
 
+> Prize Generator is an application that demonstrates using multiple micro-services in conjunction in order to produce a variable output. In the case of this application, there are 4 micro-services that all work together to determine whether the user is the winner of a virtual gold, silver or bronze medal. 
 
+> The services are set out as follows:
+* frontend - this is the service that the user interacts with. It responds to link-clicks and shows the outcome of the attempt submission.
+* random_numbers - this is the service that uses the python random.randint standard library module to output a random number between 100 and 999
+* random_letters - this is the service that uses random.randint to output a random letter in a pre-defined list
+* back-end - this is the service that takes the output of random_numbers and random_letters and determines whether the output was a win and what type of medal if so
 
+> The flask orchestration of the app works as follows:
+1. a user submits an attempt to the front-end
+2. the front-end sends a request to the back-end
+3. the back-end submits requests to random_numbers and random_letters
+4. the back-end takes the request output, determines the outcome and commits the result to the database
+5. the user is redirected to the relevant page showing either win or loss
 
 ## Setup
-> The source code for the Prize Project web application can be cloned from [this Github repository](https://github.com/RobLewisQA/Prize_Project). In order to run the application on Linux Ubuntu 18.04 on your localhost port, ensure that you have Python 3.6 or higher installed, as well as the python installer package, pip3. The following commands should be input in order into your Linux terminal:
-1. git init
-2. git clone https://github.com/RobLewisQA/Practical_Project
-2. (cd Prize_Project)
-3. sh docker_installation.sh
-4. docker-compose build
-5. docker-compose up -d  
+> The source code for the Prize Generator web application can be cloned from [this Github repository](https://github.com/RobLewisQA/Prize_Generator). In order to run the application on Linux Ubuntu 18.04 on your localhost port, ensure that you have Python 3.6 or higher installed, as well as the python installer package, pip3. The following commands should be input in order into your Linux terminal:
+1. install docker (sudo apt install curl -y && curl https://get.docker.com | sudo bash)
+2. sudo usermod -aG docker $(whoami) [then restart the terminal]
+3. install docker-compose - instructions can be found [here](https://docs.docker.com/compose/install/)
+4. git init
+5. git clone https://github.com/RobLewisQA/Prize_Generator and make sure that you are in this directory
+6. docker-compose build
+7. docker-compose up -d  
+
+This project utilised a variety of Continuous Integration/Continuous Deployment tools in order to automate the journey from development to deployment. From the perspective of the developer, this is the order of execution for the automation pipeline:
+1. Use GitHub for version control, and use webhooks in conjunction with Jenkins Pipeline so that a git command (eg. push) will execute a new build automatically
+2. As set out in the Jenkinsfile, a test stage is executed within a virtual environment, unit-testing and integration-testing each micro-service
+3. If the tests are passed, the docker-compose build is executed, creating containers for each service referencing images stoerd in Docker Hub
+4. If the new Docker images differ to the ones stored in Docker Hub, the new images are pushed up to the repository there
+5. Jenkins then executes the inventory and playbook files which tell Ansible how the swarm must be configured and installs the dependencies depending on the specified role of each machine (node) in the swarm.
+6. Jenkins then deploys the swarm of services as a stack
 
 ## Technologies
 #### Cloud Server Host:
@@ -27,7 +47,7 @@
 > This application was tested using the flask-testing, unittest, pytest, pytest-cov python libraries. The testing thoughouly interrogates the app's logic and configuration, using mock API requests and the SQLite database engine for data-submission testing. The coverage of testing is [INSERT HERE]% altogether.
 > To replicate the testing, simply run...
 #### Deployment software:
-> Prize Project was designed for containerised deployment across 4 virtual machines - each machine's name and role is specified in the Ansible inventory.yaml file, so these must be followed or changed appropriately for Ansible to connect to them. Docker is the containerisation tool used for this application, and Ansible is used with Jenkins to initialise a swarm of a manager node, a worker node and an Nginx node acting as the reverse proxy as well as a load balancer. It is recommended that only the Nginx node be accessible to HTTP traffic - the script design is based on ports 5000, 5001, 5002 and 5003 being inaccessibile to public requests.
+> Prize Generator was designed for containerised deployment across 4 virtual machines - each machine's name and role is specified in the Ansible inventory.yaml file, so these must be followed or changed appropriately for Ansible to connect to them. Docker is the containerisation tool used for this application, and Ansible is used with Jenkins to initialise a swarm of a manager node, a worker node and an Nginx node acting as the reverse proxy as well as a load balancer. It is recommended that only the Nginx node be accessible to HTTP traffic - the script design is based on ports 5000, 5001, 5002 and 5003 being inaccessibile to public requests.
 >Continuous Deployment utilises a Jenkins pipeline to support automated deployment using Git Webhooks, so that a push to a specified branch of the repository intiates a rebuild of the app on the new source code without bringing the web-app down in the meanwhile. The Jenkins pipeline also pushes the images of containers to a Docker Hub repository before initiating the swarm deployment. This saves build time where the image already exists and can be pulled down from Docker Hub rather than rebuilt each time.
 #### Continous Integration and Version Control:
 > The source code for this application is maintained in a Github repository accessible [here](https://github.com/RobLewisQA/Prize_Project), and can be conncted to Jenkins for automatic continuous integration and deployment.
