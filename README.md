@@ -32,9 +32,18 @@
 #### Continous Integration and Version Control:
 > The source code for this application is maintained in a Github repository accessible [here](https://github.com/RobLewisQA/Prize_Project), and can be conncted to Jenkins for automatic continuous integration and deployment.
 
+## Configuration
+![chart](Configuration_Diagram.PNG)
+## Testing outcomes
+
 ## Database Entity Relationship Diagram
-> The database for Prize is composed of 2 tables: 
-![chart](Tuckshop_ERD.PNG)
+> The database for Prize_Generator consists of one table with the following columns and constraints:
+| Column | Constraint | Type | Notes |
+| --- | --- | --- |
+| ID | Primary Key, Not Null | INT | Can be used to link tables if another is added to the database |
+| rand_number | Not Null | VARCHAR (string) | denotes the output of the two middle services |
+| win_lose | Not Null | VARCHAR | Output of backend logic processes to determine if win or lose |
+| prize | None | VARCHAR | Output of backend logic to determine prize if win_lose outcome is 'win' |
 
 ## Risk Assessment
 Description | Evaluation | Likelihood | Impact Level | Responsibility | Response | Control Mearues
@@ -70,3 +79,4 @@ Docker installation | --- | --- | --- | --- | --- | ---
 ## References:
 ##### r1 - https://appfleet.com/blog/building-docker-images-to-docker-hub-using-jenkins-pipelines/ - using jenkins with dockerhub
 ##### r2 - https://www.blazemeter.com/blog/how-to-integrate-your-github-repository-to-your-jenkins-project
+##### r3 - https://gitlab.com/qacdevops/trio-task - basis script adapted for docker-compose
