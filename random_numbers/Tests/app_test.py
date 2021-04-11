@@ -18,4 +18,4 @@ class TestResponse(TestBase):
 
     def test_rand_numbers(self):    # testing the response from the back-end when 500 is the output from random_numbers
         with patch('requests.get') as g:
-            g.return_value.text = "500"
+            g.return_value.text = "990"
