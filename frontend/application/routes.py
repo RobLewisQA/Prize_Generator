@@ -1,8 +1,8 @@
 from flask import Flask, redirect, request, url_for,render_template, Response, jsonify
-from application import app
-from os import getenv
 from flask_sqlalchemy import SQLAlchemy
 import requests
+from application import app, db, models
+from application.models import Outcomes
 
 
 @app.route('/', methods=['GET','POST'])    # returns the homepage
