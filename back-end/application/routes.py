@@ -12,15 +12,15 @@ def prizegen():
 
     num_letter = random_number + random_letter    # request both service outputs & concatenate them
 
-    if (int(random_number) < 300) & (random_letter == 'e'):    # logic to determine if win or lose and prize
+    if (int(random_number) < 200) & (random_letter == 'e'):    # logic to determine if win or lose and prize
         outcome = 'win'
         prize = 'Gold'
     elif (int(random_number) < 300) & (random_letter == 'a' or random_letter == 'b'):
         outcome = 'win'
         prize = 'Silver'
-    elif (int(random_number) < 300) & (random_letter == 'c' or random_letter == 'd'):
+    elif (int(random_number) < 400) & (random_letter == 'c' or random_letter == 'd'):
         outcome = 'win'
-        prize = 'Bronze'
+        prize = 'Cheese'
     else:
         outcome = 'lose'
         prize = 'no prize'

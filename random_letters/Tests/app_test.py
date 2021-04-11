@@ -20,4 +20,4 @@ class TestResponse(TestBase):
         response = self.client.get('http://random_numbers:5002/rletters')
         assert response.status_code == 200
         output = response.data.decode('utf-8')
-        assert output in ['a','b','c','d','e']
+        assert output in ['a','b','c','d','e','v','w','x','y','z']

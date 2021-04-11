@@ -32,7 +32,7 @@ class TestBackend(TestBase):    # testing submission to the database
     
     def test_backend_goldwin(self):    # testing the backend output given a gold-winning output from the two middle services
         with requests_mock.mock() as m:
-            m.get("http://random_numbers:5001/rnum", text = "201")
+            m.get("http://random_numbers:5001/rnum", text = "149")
             m.get("http://random_letters:5002/rletters", text = "e")
             response = self.client.get("http://back-end:5000/prizegen")
             self.assertIn(b'win', response.data)
@@ -40,7 +40,7 @@ class TestBackend(TestBase):    # testing submission to the database
     
     def test_backend_silverwin(self):    # testing the backend output given a silver-winning output from the two middle services
         with requests_mock.mock() as m:
-            m.get("http://random_numbers:5001/rnum", text = "207")
+            m.get("http://random_numbers:5001/rnum", text = "140")
             m.get("http://random_letters:5002/rletters", text = "a")
             response = self.client.get("http://back-end:5000/prizegen")
             self.assertIn(b'win', response.data)
@@ -52,11 +52,11 @@ class TestBackend(TestBase):    # testing submission to the database
             m.get("http://random_letters:5002/rletters", text = "c")
             response = self.client.get("http://back-end:5000/prizegen")
             self.assertIn(b'win', response.data)
-            self.assertIn(b'Bronze', response.data)
+            self.assertIn(b'Cheese', response.data)
     
     def test_backend_lose(self):    # testing the backend output given a losing output from the two middle services
         with requests_mock.mock() as m:
-            m.get("http://random_numbers:5001/rnum", text = "500")
+            m.get("http://random_numbers:5001/rnum", text = "900")
             m.get("http://random_letters:5002/rletters", text = "a")
             response = self.client.get("http://back-end:5000/prizegen")
             self.assertEqual(response.status_code, 200)
