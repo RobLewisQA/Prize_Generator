@@ -38,7 +38,7 @@
 
 ## Database Entity Relationship Diagram
 > The database for Prize_Generator consists of one table with the following columns and constraints:
-| Column | Constraint | Type | Notes |
+| Column | Constraint | Type | Notes
 | --- | --- | --- |
  ID | Primary Key, Not Null | INT | Can be used to link tables if another is added to the database |
  rand_number | Not Null | VARCHAR (string) | denotes the output of the two middle services |
@@ -48,7 +48,7 @@
 ## Risk Assessment
 Description | Evaluation | Likelihood | Impact Level | Responsibility | Response | Control Mearues
 | --- | --- | --- | --- | --- | --- | --- |
-All application virtual compute machine goes down due to cloud host failure | Application goes offline | Low | High | GCP | Spin up a new vm instance either in GCP or an alternative cloud provider and clone the Github repo to integrate with Jenkins | Keep an up-to-date source code on Github
+All application virtual compute machine goes down due to cloud host failure | Application goes offline | Low | GCP | Spin up a new vm instance either in GCP or an alternative cloud provider and clone the Github repo to integrate with Jenkins | Keep an up-to-date source code on Github
 
 Application's virtual MySQL machine goes down | Application stays up but database recording fails. All services besides remain in tact | Low | High | GCP | Spin up a new vm instance in GCP and update the configurations with SQLAlchemy and the virtual compute machine | Keep a backup database
 

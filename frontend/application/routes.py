@@ -5,8 +5,6 @@ from flask_sqlalchemy import SQLAlchemy
 import requests
 
 
-
-
 @app.route('/', methods=['GET','POST'])
 def home():
     return render_template('home.html')
