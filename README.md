@@ -1,14 +1,16 @@
 # Prize Project
 ## Application Overview
-
+### Introduction
 > Prize Generator is an application that demonstrates using multiple micro-services in conjunction in order to produce a variable output. In the case of this application, there are 4 micro-services that all work together to determine whether the user is the winner of a virtual gold, silver or bronze medal. 
 
+### Flask micro-services
 > The services are set out as follows:
 * frontend - this is the service that the user interacts with. It responds to link-clicks and shows the outcome of the attempt submission.
 * random_numbers - this is the service that uses the python random.randint standard library module to output a random number between 100 and 999
 * random_letters - this is the service that uses random.randint to output a random letter in a pre-defined list
 * back-end - this is the service that takes the output of random_numbers and random_letters and determines whether the output was a win and what type of medal if so
 
+### Flask micro-service order of execution
 > The flask orchestration of the app works as follows:
 1. a user submits an attempt to the front-end
 2. the front-end sends a request to the back-end
@@ -16,7 +18,7 @@
 4. the back-end takes the request output, determines the outcome and commits the result to the database
 5. the user is redirected to the relevant page showing either win or loss
 
-## Setup
+## Setup steps for download
 > The source code for the Prize Generator web application can be cloned from [this Github repository](https://github.com/RobLewisQA/Prize_Generator). In order to run the application on Linux Ubuntu 18.04 on your localhost port, ensure that you have Python 3.6 or higher installed, as well as the python installer package, pip3. The following commands should be input in order into your Linux terminal:
 1. install docker (sudo apt install curl -y && curl https://get.docker.com | sudo bash)
 2. sudo usermod -aG docker $(whoami) [then restart the terminal]
@@ -26,34 +28,49 @@
 6. docker-compose build
 7. docker-compose up -d  
 
-This project utilised a variety of Continuous Integration/Continuous Deployment tools in order to automate the journey from development to deployment. From the perspective of the developer, this is the order of execution for the automation pipeline:
-1. Use GitHub for version control, and use webhooks in conjunction with Jenkins Pipeline so that a git command (eg. push) will execute a new build automatically
+### Development & CI/CD
+>This project utilised a variety of Continuous Integration/Continuous Deployment tools in order to automate the journey from development to deployment. From the perspective of the developer, this is the order of execution for the automation pipeline:
+
+* Use GitHub for version control, and use webhooks in conjunction with Jenkins Pipeline so that a git command (eg. push) will execute a new build automatically
 2. As set out in the Jenkinsfile, a test stage is executed within a virtual environment, unit-testing and integration-testing each micro-service
 3. If the tests are passed, the docker-compose build is executed, creating containers for each service referencing images stoerd in Docker Hub
 4. If the new Docker images differ to the ones stored in Docker Hub, the new images are pushed up to the repository there
 5. Jenkins then executes the inventory and playbook files which tell Ansible how the swarm must be configured and installs the dependencies depending on the specified role of each machine (node) in the swarm.
 6. Jenkins then deploys the swarm of services as a stack
 
-## Technologies
+## Technologies used in development
 #### Cloud Server Host:
 > This web application was designed using a cloud-hosted (GCP) compute machine developed on a Linux Ubuntu 20.10 bootdisk - the most recent with long-term support at the time of writing, and has been tested on Ubuntu 18.04. Earlier or later versions of Ubuntu may cause the app to behave unexpectedly, depending on support for versions of the app's dependencies.  
 #### Database format:
-> The database is a MySQL5.7 single table database image within a Docker container. The app source-code uses SQLalchemy for reading from and writing to the database using python commands.
+> The database is a MySQL5.7 single table database image within a dedicated GCP virtual machine. The app source-code uses SQLalchemy for reading from and writing to the database using python commands.
 #### Frontend script:
-> The application uses the Flask web-development framework to allow python statements to manage HTML output for the URI routes specified in the routes file. HTML forms are used for the frontend to send post and get requests to the database in the backend. The html templates are constructed using Jinja2 to allow the use of variables in templating construction. The primary modules within Flask used for frontend purposes include render_template, request, url_for and jsonify. 
+> The application uses the Flask web-development framework to allow python statements to manage HTML output for the URI routes specified in the routes file. HTML forms are used for the frontend to send post and get requests to the database in the backend. The html templates are constructed using Jinja2 to allow the use of variables in templating construction. The primary modules within Flask used for frontend purposes include render_template, request, url_for and jsonify. These are all installed from the requirements.txt files in each service.
 #### Scripting software:
-> The logic for the random number generator, random letter generator and the backend data handling is scripted using python 3.6. The python requests library, in conjunction with the Flask API is used to send JSON data to specified routes. The Dockerfiles are scripted in GO, the docker-compose.yaml and Ansible scripts use the YAML language and the Jenkinsfile uses Declarative Pipeline (based on the Groovy syntax).
+> The logic for the random number generator, random letter generator, backend data handling and frontend logic is scripted using python 3.6. The python requests library, in conjunction with the Flask API is used to send JSON data to specified routes. The Dockerfiles are scripted in GO, the docker-compose.yaml and Ansible scripts use the YAML language and the Jenkinsfile uses Declarative Pipeline (based on the Groovy syntax).
 #### Testing software:
-> This application was tested using the flask-testing, unittest, pytest, pytest-cov python libraries. The testing thoughouly interrogates the app's logic and configuration, using mock API requests and the SQLite database engine for data-submission testing. The coverage of testing is [INSERT HERE]% altogether.
-> To replicate the testing, simply run...
+> This application was tested using the flask-testing, unittest, pytest, pytest-cov python libraries. The testing thoughouly interrogates the app's logic and configuration, using mock API requests and the SQLite database engine for data-submission testing. The coverage of unit-testing is 100% altogether. This does not reflect the coverage of integration testing which is lower due to issues in some places due to time-out issues with the requests package and the flask API.
+
+> To replicate the testing on a Linux Ubuntu 18.04 or higher, simply run:
+1. sudo apt-get install python3-venv
+2. python3 -m venv venv
+3. source venv/bin/activate
+4. pytest random_letters --cov=application 
+5. pytest random_numbers --cov=application
+6. pytest back-end --cov=application
+7. pytest frontend --cov=application
+#### Containerisation and cluster configuration software:
+> Prize Generator uses a swarm Docker containers across multiple machines (cluster) to provide a seamless continuous integration and deployment experience, ensuring a consistent environment across multiple machines. The cluster for this app consists of a Manager node and a Worker node, where the Manager tells the Worker nodes what to do and builds the images that the Worker nodes will build in their own swarms of containers. Ansible was used in this project development in order to automate the configuration of the cluster, setting out the roles and execution tasks appropriate to each designate node.
 #### Deployment software:
 > Prize Generator was designed for containerised deployment across 4 virtual machines - each machine's name and role is specified in the Ansible inventory.yaml file, so these must be followed or changed appropriately for Ansible to connect to them. Docker is the containerisation tool used for this application, and Ansible is used with Jenkins to initialise a swarm of a manager node, a worker node and an Nginx node acting as the reverse proxy as well as a load balancer. It is recommended that only the Nginx node be accessible to HTTP traffic - the script design is based on ports 5000, 5001, 5002 and 5003 being inaccessibile to public requests.
 >Continuous Deployment utilises a Jenkins pipeline to support automated deployment using Git Webhooks, so that a push to a specified branch of the repository intiates a rebuild of the app on the new source code without bringing the web-app down in the meanwhile. The Jenkins pipeline also pushes the images of containers to a Docker Hub repository before initiating the swarm deployment. This saves build time where the image already exists and can be pulled down from Docker Hub rather than rebuilt each time.
+#### Reverse proxy and load balancing:
+> Nginx is used in this configuration as the reverse proxy, sitting outside the cluster and does not contain any containers supporting the application service, reducing the risk of unwanted access to micro-services through back doors. The load balancing of traffic to the cluster is also managed by Nginx, transmitting requests made through it to the machine in the cluster with the least traffic, keeping the service fast and responsive.
 #### Continous Integration and Version Control:
 > The source code for this application is maintained in a Github repository accessible [here](https://github.com/RobLewisQA/Prize_Project), and can be conncted to Jenkins for automatic continuous integration and deployment.
 
 ## Configuration
 ![chart](Configuration_Diagram.PNG)
+>As the diagram above shows, the user can only access the service through the IP adress of the Nginx machine operating at port 80 (http). Nginx then reroutes traffic 
 ## Testing outcomes
 
 ## Database Entity Relationship Diagram
@@ -87,7 +104,7 @@ Docker installation | --- | --- | --- | --- | --- | ---
 >To see a kanban Trello board of the development process workflow, click [here](https://trello.com/b/h1v0LX39/lottery)
 
 ## References:
-##### r1 - https://appfleet.com/blog/building-docker-images-to-docker-hub-using-jenkins-pipelines/ - using jenkins with dockerhub
-##### r2 - https://www.blazemeter.com/blog/how-to-integrate-your-github-repository-to-your-jenkins-project
-##### r3 - https://gitlab.com/qacdevops/trio-task - basis script adapted for docker-compose
-##### r4 - https://github.com/KelvinBastow/prizegenerator
+##### Support working with GitHub WebHooks and Jenkins - https://www.blazemeter.com/blog/how-to-integrate-your-github-repository-to-your-jenkins-project
+##### The basis for the docker-compose script, adapted and heavily amended - https://gitlab.com/qacdevops/trio-task
+##### Ideas for testing and parsing json from get requests into Jinja2 - https://github.com/KelvinBastow/prizegenerator
+##### Script basis for sending the docker-compose file to the Jenkins user - https://github.com/htr-volker/ansible-jenkins/blob/master/jenkins/deploy_stack.sh
