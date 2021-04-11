@@ -32,6 +32,7 @@ class TestBackend(TestBase):    # testing submission to the database
 
     
     def test_backend_lose(self):    # testing the backend for output
+        return ""
         # with requests_mock.mock() as m:    
         #     response = self.client.get("http://back-end:5000/prizegen")
         #     assert ('win' in response.data == True) or ('lose' in response.data == True)
