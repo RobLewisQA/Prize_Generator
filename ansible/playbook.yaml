@@ -7,3 +7,7 @@
   roles:
   - docker-install
   - worker
+
+- hosts: nginx
+  roles: 
+  - nginx

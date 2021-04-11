@@ -11,16 +11,16 @@ services:
     environment: 
       DATABASE_URI: ${DATABASE_URI}
 
-  nginx:
-    image: nginx:latest
-    ports:
-    - target: 80
-      published: 80
-      protocol: tcp
-    volumes:
-    - type: bind
-      source: ./nginx/nginx.conf
-      target: /etc/nginx/nginx.conf
+  # nginx:
+  #   image: nginx:latest
+  #   ports:
+  #   - target: 80
+  #     published: 80
+  #     protocol: tcp
+  #   volumes:
+  #   - type: bind
+  #     source: ./nginx/nginx.conf
+  #     target: /etc/nginx/nginx.conf
   
   random_numbers:
     container_name: random_numbers
