@@ -15,10 +15,10 @@ def prizegen():
     if (int(random_number) < 300) & (random_letter == 'e'):    # logic to determine if win or lose and prize
         outcome = 'win'
         prize = 'Gold'
-    elif (int(random_number) < 300) & (random_letter == 'a' or random_letter == 'b'):
+    elif (int(random_number) < 290) & (random_letter == 'a' or random_letter == 'b'):
         outcome = 'win'
         prize = 'Silver'
-    elif (int(random_number) < 300) & (random_letter == 'c' or random_letter == 'd'):
+    elif (int(random_number) < 280) & (random_letter == 'c' or random_letter == 'd'):
         outcome = 'win'
         prize = 'Bronze'
     else:
