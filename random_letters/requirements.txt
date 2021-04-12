@@ -4,3 +4,5 @@ requests
 pytest
 flask-testing
 pytest-cov
+Flask-SQLAlchemy==2.4.4
+SQLAlchemy==1.3.18
