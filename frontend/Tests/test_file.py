@@ -31,3 +31,4 @@ class TestResponse(TestBase):
     def test_frontend_home(self):    # testing frotnend
         response = self.client.get('http://frontend:5003/')
         #assert response.status_code == 200
+        
