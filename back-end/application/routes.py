@@ -27,7 +27,7 @@ def prizegen():
     
     data = {"rand_number":num_letter,"win_lose":outcome,"prize":prize}
     
-    new_entry = Outcomes(rand_number=num_letter,win_lose=outcome,prize=prize)    # add new record to database
+    new_entry = Outcomes(rand_number=num_letter,win_lose=outcome,prize=prize)    # add new record to database.
     db.session.add(new_entry)
     db.session.commit()
 
