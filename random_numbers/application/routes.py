@@ -4,6 +4,6 @@ import random
 
 @app.route('/rnum', methods=['GET'])    # generating a random 3 digit integer
 def rnum_generator():
-    num = random.randint(100,999)
+    num = random.randint(100,1500)
     return f'{num}'
 
