@@ -3,6 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 import requests
 from application import app, db, models
 from application.models import Outcomes
+import json
 
 
 @app.route('/', methods=['GET','POST'])    # returns the homepage
@@ -15,8 +16,8 @@ def frontend():
     random_number = requests.get("http://random_numbers:5001/rnum").text
     random_letter = requests.get("http://random_letters:5002/rletters").text
 
-    data = requests.get("http://back-end:5000/prizegen").json()
-    
+    data = json.loads(requests.get("http://back-end:5000/prizegen"))
+
     new_entry = Outcomes(rand_number=data["rand_number"],win_lose=data["win_lose"],prize=data["prize"])    # add new record to database
     db.session.add(new_entry)
     db.session.commit()
