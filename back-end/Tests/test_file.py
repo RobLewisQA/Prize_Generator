@@ -28,7 +28,7 @@ class TestBase(TestCase):    # create a replacement version for testing database
 class TestBackend(TestBase):    # testing submission to the database
     def test_backend_engine(self):
         response = Outcomes.query.all()
-        assert type(response) == list
+        self.assertEqual(response.status_code, 200) 
     
     def test_backend_goldwin(self):    # testing the backend output given a gold-winning output from the two middle services
         with requests_mock.mock() as m:
