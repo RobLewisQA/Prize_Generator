@@ -39,13 +39,13 @@ services:
       published: 5002
       protocol: tcp
 
-# creating a docker container for frontend with image referencing Docker Hub. 
+# creating a docker container for frontend with image referencing Docker Hub 
   frontend:
     container_name: frontend
     image: roblewisqa/frontend:latest
     build: ./frontend
     deploy:
-      replicas: 3
+      replicas: 10
     ports:
     - target: 5003
       published: 5003

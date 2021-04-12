@@ -5,10 +5,10 @@ from flask_sqlalchemy import SQLAlchemy
 import requests
 
 
-@app.route("/prizegen", methods = ['GET'])    
+@app.route('/prizegen', methods = ['GET'])    
 def prizegen():
-    random_number = requests.get("http://random_numbers:5001/rnum").text
-    random_letter = requests.get("http://random_letters:5002/rletters").text
+    random_number = requests.get('http://random_numbers:5001/rnum').text
+    random_letter = requests.get('http://random_letters:5002/rletters').text
 
     num_letter = random_number + random_letter    # request both service outputs & concatenate them
 
