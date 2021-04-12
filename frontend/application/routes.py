@@ -13,7 +13,7 @@ def home():
 
 @app.route("/prize-board", methods=['GET'])
 def frontend():
-    data=requests.get("http://back-end:5000/prizegen").json()
+    data=requests.get("http://back-end:5000/prizegen").json()#.response.data.decode('utf-8')#
     host_name = request.host
     if data["win_lose"] == 'win':
         return render_template('winner.html', data=data)
