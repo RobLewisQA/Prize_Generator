@@ -31,4 +31,4 @@ def prizegen():
     db.session.add(new_entry)
     db.session.commit()
 
-    return jsonify(data)
+    return data #jsonify(data)
