@@ -14,7 +14,7 @@ class TestResponse(TestBase):
         response = self.client.get('http://random_numbers:5001/rnum')
         assert response.status_code == 200
         output = response.data 
-        assert int(output) > 99 & int(output)<1001
+        assert int(output) > 99 & int(output)<2000
 
     def test_rand_numbers(self):    # testing the response from the back-end when 500 is the output from random_numbers
         with patch('requests.get') as g:
